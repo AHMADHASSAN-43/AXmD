@@ -2,6 +2,7 @@ const express = require('express');
 const compression = require('compression');
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 const app = express();
 __path = process.cwd();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,18 @@ try {
     pageHtml = fs.readFileSync(path.join(__dirname, 'mini.html'));
     pageText = pageHtml.toString('utf8');
 } catch (e) {}
+
+// Pre-compress the page once per encoding (brotli is ~25% smaller than gzip = faster on slow nets)
+const encCache = {};
+function encoded(enc) {
+    if (!pageHtml) return null;
+    if (!encCache[enc]) {
+        encCache[enc] = enc === 'br'
+            ? zlib.brotliCompressSync(pageHtml, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 6 } })
+            : zlib.gzipSync(pageHtml, { level: 9 });
+    }
+    return encCache[enc];
+}
 
 // Service worker: cached shell so the site opens fast even on a slow connection
 let swJs = null;
@@ -62,14 +75,25 @@ function personalise(html, name, by) {
 
 // main page: short cache so a refresh always gets the latest design quickly
 app.get('/', (req, res) => {
-    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
+    // Vercel's edge keeps the page for an hour and serves it instantly without waking the server
+    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
     const name = cleanName(req.query.name);
     const by = cleanName(req.query.by);
     if (pageText && (name || by)) {
         return res.type('html').send(personalise(pageText, name, by));
     }
     if (pageHtml) {
-        res.type('html').send(pageHtml);
+        const ae = String(req.headers['accept-encoding'] || '');
+        const enc = /\bbr\b/.test(ae) ? 'br' : (/\bgzip\b/.test(ae) ? 'gzip' : null);
+        res.setHeader('Vary', 'Accept-Encoding');
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        if (enc) {
+            const buf = encoded(enc);
+            res.setHeader('Content-Encoding', enc);
+            res.setHeader('Content-Length', buf.length);
+            return res.end(buf);
+        }
+        res.send(pageHtml);
     } else {
         res.sendFile(__path + '/mini.html');
     }
