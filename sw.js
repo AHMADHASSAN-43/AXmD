@@ -1,19 +1,27 @@
-// Service worker: faster opening on slow networks.
-// - page: try network for 3s, otherwise show the last saved copy instantly
-// - fonts / icons / axios from CDNs: cached after the first load
+// Service worker: ultra fast opening, even on very slow networks.
+// - page: shown INSTANTLY from the saved copy, refreshed quietly in the background
+// - fonts / icons from CDNs: saved after the first load
 // - /api/* is never cached (stats and codes must always be live)
-const CACHE = 'ahmad-md-v1';
+const CACHE = 'ahmad-md-v2';
 const CDN = ['cdnjs.cloudflare.com', 'cdn.jsdelivr.net', 'fonts.googleapis.com', 'fonts.gstatic.com'];
+const PRECACHE = [
+  '/',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+  'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap'
+];
 
-self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE).then(c => Promise.all(PRECACHE.map(u => c.add(u).catch(() => {}))))
+      .then(() => self.skipWaiting())
+  );
+});
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
-
-function timeout(ms) { return new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms)); }
 
 self.addEventListener('fetch', e => {
   const req = e.request;
@@ -25,12 +33,10 @@ self.addEventListener('fetch', e => {
     if (req.mode === 'navigate') {
       e.respondWith((async () => {
         const cache = await caches.open(CACHE);
-        const fresh = fetch(req).then(r => { if (r && r.ok) cache.put('/', r.clone()); return r; });
-        try { return await Promise.race([fresh, timeout(3000)]); }
-        catch (err) {
-          const cached = await cache.match('/');
-          return cached || fresh;
-        }
+        const hit = await cache.match('/');
+        const net = fetch(url.search ? '/' : req).then(r => { if (r && r.ok) cache.put('/', r.clone()); return r; });
+        if (hit) { e.waitUntil(net.catch(() => {})); return hit; }   // instant
+        return net;                                                    // first ever visit
       })());
     }
     return;
