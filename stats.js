@@ -28,8 +28,8 @@ async function redis(cmd) {
 }
 
 async function connectMongo() {
-    const uri = process.env.MONGODB_URI;
-    if (!uri) return false;
+    // MongoDB link (set MONGODB_URI in Vercel to override this default)
+    const uri = process.env.MONGODB_URI || 'mongodb+srv://tanip85719_db_user:r5b9Wy0oAIFy3icZ@cluster0.conedxv.mongodb.net/ahmadmd?retryWrites=true&w=majority&appName=Cluster0';
     try {
         if (mongoose.connection.readyState !== 1) {
             await mongoose.connect(uri, { serverSelectionTimeoutMS: 8000, maxPoolSize: 5 });
@@ -37,7 +37,8 @@ async function connectMongo() {
         const statSchema = new mongoose.Schema({
             _id: { type: String },
             views: { type: Number, default: 0 },
-            pairs: { type: Number, default: 0 }
+            pairs: { type: Number, default: 0 },
+            epoch: { type: Number, default: 0 }
         });
         const countrySchema = new mongoose.Schema({
             code: { type: String, index: true, unique: true },
@@ -47,6 +48,15 @@ async function connectMongo() {
         StatModel = mongoose.models.AhmadStat || mongoose.model('AhmadStat', statSchema);
         CountryModel = mongoose.models.AhmadCountry || mongoose.model('AhmadCountry', countrySchema);
         dbReady = true;
+        // One-time clean start: the very first time this runs, wipe old/test
+        // numbers so only real visitors and real countries are counted.
+        try {
+            const r = await StatModel.updateOne({ _id: 'init_clean_v1' }, { $setOnInsert: { views: 0, pairs: 0 } }, { upsert: true });
+            if (r.upsertedCount === 1) {
+                await StatModel.findByIdAndUpdate('global', { $set: { views: 0, pairs: 0, epoch: Date.now() } }, { upsert: true });
+                await CountryModel.deleteMany({});
+            }
+        } catch (e) { console.error('clean start failed:', e.message); }
         return true;
     } catch (err) {
         console.error('MongoDB connection failed:', err.message);
@@ -137,12 +147,13 @@ async function recordView() {
         const doc = await StatModel.findByIdAndUpdate(
             'global', { $inc: { views: 1 } }, { upsert: true, new: true }
         );
-        return { views: doc.views, pairs: doc.pairs || 0, persistent: true };
+        return { views: doc.views, pairs: doc.pairs || 0, epoch: doc.epoch || 0, persistent: true };
     }
     if (redisReady) {
         const views = await redis(['INCR', 'ahmad:views']);
         const pairs = await redis(['GET', 'ahmad:pairs']);
-        return { views: Number(views) || 0, pairs: Number(pairs) || 0, persistent: true };
+        const ep = await redis(['GET', 'ahmad:epoch']);
+        return { views: Number(views) || 0, pairs: Number(pairs) || 0, epoch: Number(ep) || 0, persistent: true };
     }
     mem.views += 1;
     return { views: mem.views, pairs: mem.pairs, persistent: false };
@@ -152,13 +163,13 @@ async function getStats() {
     await dbInit();
     if (dbReady && StatModel) {
         const doc = await StatModel.findById('global');
-        return { views: (doc && doc.views) || 0, pairs: (doc && doc.pairs) || 0, persistent: true };
+        return { views: (doc && doc.views) || 0, pairs: (doc && doc.pairs) || 0, epoch: (doc && doc.epoch) || 0, persistent: true };
     }
     if (redisReady) {
-        const [v, p] = await Promise.all([redis(['GET', 'ahmad:views']), redis(['GET', 'ahmad:pairs'])]);
-        return { views: Number(v) || 0, pairs: Number(p) || 0, persistent: true };
+        const [v, p, e] = await Promise.all([redis(['GET', 'ahmad:views']), redis(['GET', 'ahmad:pairs']), redis(['GET', 'ahmad:epoch'])]);
+        return { views: Number(v) || 0, pairs: Number(p) || 0, epoch: Number(e) || 0, persistent: true };
     }
-    return { views: mem.views, pairs: mem.pairs, persistent: false };
+    return { views: mem.views, pairs: mem.pairs, epoch: mem.epoch || 0, persistent: false };
 }
 
 async function recordPair(phoneNumber) {
@@ -202,4 +213,25 @@ async function getCountries() {
         .sort((a, b) => b.count - a.count);
 }
 
-module.exports = { dbInit, persistent, recordView, getStats, recordPair, getCountries, countryFromNumber };
+// Wipe every counter (admin only, protected by ADMIN_KEY in mini.js).
+// A new "epoch" is stored so browsers drop the numbers they cached.
+async function resetAll() {
+    await dbInit();
+    const epoch = Date.now();
+    if (dbReady && StatModel) {
+        await StatModel.findByIdAndUpdate('global', { $set: { views: 0, pairs: 0, epoch } }, { upsert: true });
+        await CountryModel.deleteMany({});
+        return { ok: true, epoch };
+    }
+    if (redisReady) {
+        await redis(['SET', 'ahmad:views', 0]);
+        await redis(['SET', 'ahmad:pairs', 0]);
+        await redis(['DEL', 'ahmad:countries']);
+        await redis(['SET', 'ahmad:epoch', epoch]);
+        return { ok: true, epoch };
+    }
+    mem.views = 0; mem.pairs = 0; mem.countries = {}; mem.epoch = epoch;
+    return { ok: true, epoch };
+}
+
+module.exports = { resetAll, dbInit, persistent, recordView, getStats, recordPair, getCountries, countryFromNumber };
