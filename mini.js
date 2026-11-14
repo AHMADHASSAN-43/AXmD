@@ -104,6 +104,7 @@ router.get('/servers', (req, res) => {
         name: `Server ${key.replace('server', '')}`,
         url: serverUrls[key]
     }));
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=3600, stale-while-revalidate=86400');
     res.json({ servers });
 });
 
