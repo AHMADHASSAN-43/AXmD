@@ -4340,7 +4340,7 @@ function rF(){var i=L()==='ur'?3:L()==='rm'?5:0;$('sxFaq').dir=rtl()?'rtl':'ltr'
 /* ===== Ahmad MD Command Guide (language aware, English by default) ===== */
 var DB=null,gq=$('sxQ'),gcb=$('sxCB'),gOpen=-1,built='',fb='';
 function G(k){var l=L();return (GT[l]&&GT[l][k])||GT.en[k]||''}
-function gdb(){if(!DB){var t=$('gdat').textContent;if(!t){try{var x=new XMLHttpRequest();x.open('GET','/gdat.json',false);x.send();t=x.responseText}catch(e){}}try{DB=JSON.parse(t)}catch(e){DB={s:[],d:[]}}}return DB}
+function gdb(){if(!DB){var t=$('gdat').textContent;if(!t){try{var x=new XMLHttpRequest();x.open('GET','/gdat.json?v=2',false);x.send();t=x.responseText}catch(e){}}try{DB=JSON.parse(t)}catch(e){DB={s:[],d:[]}}}return DB}
 function sTitle(i){var l=L();return l==='rm'?gdb().s[i][3]:((ST[l]||ST.en)[i]||ST.en[i])}
 function sIntro(i){var l=L();return l==='rm'?gdb().s[i][4]:((SI[l]||SI.en)[i]||SI.en[i])}
 function gDesc(o){return L()==='rm'?(o[3]||o[4]):(o[4]||o[3])}
@@ -4417,7 +4417,7 @@ lbl();
 <script>
 (function(){var b=document.getElementById('menuToggleBtn'),d=document.getElementById('settingsDropdown');if(!b||!d)return;
 new MutationObserver(function(){b.classList.toggle('on',d.classList.contains('show'))}).observe(d,{attributes:true,attributeFilter:['class']});
-function warm(){try{fetch('/gdat.json',{priority:'low'}).catch(function(){})}catch(e){}}
+function warm(){try{fetch('/gdat.json?v=2',{priority:'low'}).catch(function(){})}catch(e){}}
 addEventListener('load',function(){(window.requestIdleCallback||setTimeout)(warm,{timeout:4000})});})();
 </script>
 <script src="/channel-sale.js" defer></script>
