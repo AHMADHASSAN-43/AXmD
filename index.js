@@ -40,6 +40,25 @@ function encoded(enc) {
 let swJs = null;
 try { swJs = fs.readFileSync(path.join(__dirname, 'sw.js')); } catch (e) {}
 
+// Channel sale: ek hi file (channel-sale.js). Server usay seedha page ke andar jod deta hai,
+// is liye alag download nahi hota aur page foran khulta hai.
+let saleJs = '';
+try { saleJs = fs.readFileSync(path.join(__dirname, 'channel-sale.js'), 'utf8'); } catch (e) {}
+if (saleJs && pageText) {
+    const inline = '<script>' + saleJs.replace(/<\/script/gi, '<\\/script') + '</script>';
+    pageText = pageText.replace('<script src="/channel-sale.js" defer></script>', () => inline);
+    pageHtml = Buffer.from(pageText, 'utf8');
+}
+app.get('/gdat.json', (req, res) => {              // command guide: sirf Commands kholne par chahiye
+    res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+    res.type('application/json').sendFile(path.join(__dirname, 'gdat.json'));
+});
+app.get('/channel-sale.js', (req, res) => {          // inline na ho paye to yahan se load hogi
+    if (!saleJs) return res.status(404).end();
+    res.setHeader('Cache-Control', 'no-cache');
+    res.type('application/javascript').send(saleJs);
+});
+
 // Routes
 app.use('/api', miniRoutes);       // AHMAD-MD routes
 
