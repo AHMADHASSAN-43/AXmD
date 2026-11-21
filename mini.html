@@ -21,26 +21,19 @@
     }
     if(sessionStorage.getItem('ahmad_simple_darood')==='1') h.classList.add('no-darood');
     try{ if(localStorage.getItem('ahmad_has_wp')==='1') h.classList.add('has-wp'); }catch(e){}
+    try{var n=navigator,c=n.connection;if((n.hardwareConcurrency||8)<=4||(n.deviceMemory||4)<=2||(c&&(c.saveData||/2g|3g/.test(c.effectiveType||''))))h.classList.add('low-end');}catch(e){}
     h.classList.add('no-chooser');
-    h.classList.add('no-darood');
   }catch(e){}})();
   </script>
 
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-  <link rel="preconnect" href="https://whatsapp.com" crossorigin>
-  <link rel="prefetch" href="https://vip-banned.vercel.app/" as="document">
-  <link rel="preconnect" href="https://vip-banned.vercel.app/" crossorigin>
-  <link rel="preconnect" href="https://kweentech.vercel.app/" crossorigin>
+  <link rel="dns-prefetch" href="https://wa.me">
   <link rel="dns-prefetch" href="https://kweentech.vercel.app/">
   <link rel="dns-prefetch" href="https://vip-banned.vercel.app/">
-  <link rel="prefetch" href="https://fulldp-5a84481e822e.herokuapp.com/" as="document">
-  <link rel="preconnect" href="https://fulldp-5a84481e822e.herokuapp.com/" crossorigin>
   <link rel="dns-prefetch" href="https://fulldp-5a84481e822e.herokuapp.com/">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
@@ -769,26 +762,6 @@
     .confetti{ position:absolute;width:8px;height:14px; top:-20px;opacity:0;pointer-events:none; z-index:10 }
     @keyframes confettiFall{ 0%{transform:translateY(0) rotate(0);opacity:1} 100%{transform:translateY(400px) rotate(720deg);opacity:0} }
 
-    .tutorial-btn {
-      position: fixed; right: 0; top: 50%; transform: translateY(-50%);
-      display: flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
-      color: #fff; border: none; border-radius: 24px 0 0 24px;
-      padding: 10px 14px 10px 16px; font-family: inherit; font-size: 12px; font-weight: 700;
-      cursor: pointer; z-index: 9997; box-shadow: 0 8px 24px rgba(var(--brand-glow),.5);
-      transition: transform .25s ease, padding .25s ease, box-shadow .25s ease;
-    }
-    .tutorial-btn:hover { transform: translateY(-50%) translateX(-4px); box-shadow: 0 12px 32px rgba(var(--brand-glow),.7); }
-    .tutorial-btn:active { transform: translateY(-50%) translateX(0) scale(.97); }
-    .tutorial-btn i { font-size: 15px; }
-    .tutorial-label { font-size: 11px; letter-spacing: 0.3px; max-width: 48px; overflow: hidden; }
-    .tutorial-btn.hidden { display: none; }
-    @media (max-width: 580px) {
-      .tutorial-btn { right: 0; padding: 9px 12px 9px 14px; font-size: 11px; top: auto; bottom: 16px; transform: none;}
-      .tutorial-btn i { font-size: 14px; }
-      .tutorial-label { max-width: 46px; font-size: 10px; }
-      .tutorial-btn:hover { transform: translateY(-2px); }
-    }
 
     .cover {
       position: relative; height: 190px;
@@ -1088,12 +1061,14 @@
     }
 
     /* GATE: darood only */
-    #gate{position:fixed;inset:0;z-index:999999;background:#0a0a0f;display:flex;align-items:center;justify-content:center;padding:24px}
+    #gate{position:fixed;inset:0;z-index:999999;background:radial-gradient(ellipse 120% 55% at 50% 52%,rgba(0,200,83,.30),rgba(0,200,83,.07) 48%,transparent 70%),#0a0a0f;display:flex;align-items:center;justify-content:center;padding:24px}
     html.no-darood #gate{display:none}
-    #daroodBox{width:100%;max-width:380px;padding:40px 30px;text-align:center;background:#0f1412;border:2px solid var(--brand-1);border-radius:20px}
-    #daroodBox .t{font-size:22px;font-weight:700;color:var(--brand-2);margin-bottom:15px}
-    #daroodBox .a{font-size:30px;color:#fff;line-height:1.7;direction:rtl;font-family:'Noto Naskh Arabic','Traditional Arabic',serif}
-    #daroodBox .d{width:50px;height:2px;background:var(--brand-1);margin:20px auto 0}
+    #daroodBox{width:100%;max-width:440px;padding:36px 22px 40px;text-align:center;background:#09130e;border:2px solid var(--brand-1);border-radius:34px;box-shadow:0 0 70px rgba(var(--brand-glow),.28)}
+    #daroodBox .t{font-size:clamp(18px,5.4vw,24px);font-weight:700;color:var(--brand-1);margin-bottom:20px;font-family:'Noto Naskh Arabic','Noto Nastaliq Urdu','Traditional Arabic',serif}
+    #daroodBox .a{font-size:clamp(26px,8.4vw,40px);color:#fff;line-height:1.8;white-space:nowrap;direction:rtl;font-family:'Noto Naskh Arabic','Traditional Arabic',serif}
+    #daroodBox .d{width:84px;height:4px;background:var(--brand-1);margin:22px auto 34px}
+    #daroodSkip{display:inline-flex;align-items:center;gap:10px;padding:13px 34px;border:0;border-radius:40px;background:linear-gradient(135deg,var(--brand-1),var(--brand-2));color:#fff;font:700 18px Poppins,system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 26px rgba(0,200,83,.45);-webkit-tap-highlight-color:transparent}
+    #daroodSkip:active{transform:scale(.96)}
 
     /* HANG-PROOF PATCHES */
     @media (max-width:580px){
@@ -1105,7 +1080,7 @@
     .glow-orb,.orb-1,.orb-2{animation:none!important;filter:none!important;width:500px;height:500px;opacity:.12;background:radial-gradient(circle,var(--brand-1),transparent 70%)}
     .particles-bg{display:none!important}
     .card{animation:none!important;background:var(--bg-card-mobile)}
-    .tutorial-btn,.guide-highlight,.guide-pointer,.auto-badge{animation:none!important}
+    .guide-highlight,.guide-pointer,.auto-badge{animation:none!important}
 
     /* ===== Unban buttons: pehle jaisa chhota size + nayi animation (button ke andar hi) ===== */
     .unban-top{
@@ -1298,7 +1273,7 @@
     body.has-wallpaper .history-panel,
     body.has-wallpaper .fav-panel{background:rgba(0,0,0,.08)!important}
   </style>
-  <script type="speculationrules">{"prerender":[{"source":"list","urls":["https://vip-banned.vercel.app/","https://fulldp-5a84481e822e.herokuapp.com/"],"eagerness":"immediate"}],"prefetch":[{"source":"list","urls":["https://kweentech.vercel.app/"],"eagerness":"immediate"}]}</script>
+  <script type="speculationrules">{"prerender":[{"source":"list","urls":["https://vip-banned.vercel.app/","https://fulldp-5a84481e822e.herokuapp.com/"],"eagerness":"conservative"}],"prefetch":[{"source":"list","urls":["https://kweentech.vercel.app/"],"eagerness":"moderate"}]}</script>
   <script>
   if('serviceWorker' in navigator){ window.addEventListener('load',function(){ try{ navigator.serviceWorker.register('/sw.js').catch(function(){}); }catch(e){} }); }
   </script>
@@ -1333,6 +1308,86 @@ body.light-mode .menu-toggle-btn,body.has-wallpaper .menu-toggle-btn{
 @keyframes gearShine{0%,55%{left:-70%}100%{left:130%}}
 html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:none!important}
 </style>
+
+<style id="navx-css">
+.wa-pair,.fulldp-btn,.unban-side{display:none!important}
+body{padding-bottom:104px}
+.features-box,.lb-card,.xcard,.stats-row{content-visibility:auto;contain-intrinsic-size:auto 220px}
+#navx{position:fixed;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));z-index:9990;width:min(96vw,460px);display:flex;justify-content:space-between;gap:2px;padding:8px 7px;border-radius:32px;isolation:isolate;overflow:hidden;font-family:Poppins,system-ui,sans-serif;touch-action:manipulation;
+background:rgba(255,255,255,.16);
+-webkit-backdrop-filter:blur(5px) saturate(160%);backdrop-filter:blur(5px) saturate(160%);
+border:1px solid rgba(255,255,255,.38);
+box-shadow:0 8px 28px rgba(0,0,0,.28),inset 0 1px 1px rgba(255,255,255,.6),inset 0 -1px 1px rgba(255,255,255,.12)}
+#navx::before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.04) 55%,rgba(255,255,255,.1))}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#navx{background:rgba(30,40,36,.72)}}
+html.low-end #navx{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.22)}
+#navx a,#navx button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0 6px;border:1px solid transparent;border-radius:22px;background:none;font-size:10px;font-weight:700;line-height:1;font-family:inherit;white-space:nowrap;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:background .15s,transform .12s}
+/* green liquid look for icons + text: glossy green that slowly flows like water */
+#navx i,#navx span{color:transparent;-webkit-text-fill-color:transparent;background:linear-gradient(180deg,#d9ffe6 0%,var(--brand-2,#4dff95) 28%,var(--brand-1,#00c853) 58%,var(--brand-3,#008f3c) 80%,var(--brand-2,#5dffa0) 100%);background-size:100% 220%;-webkit-background-clip:text;background-clip:text;animation:navxLiquid 3.2s ease-in-out infinite alternate;filter:drop-shadow(0 1px 1.5px rgba(0,60,25,.55))}
+#navx i{font-size:19px}
+#navx span{display:block}
+@keyframes navxLiquid{from{background-position:50% 0%}to{background-position:50% 100%}}
+html.low-end #navx i,html.low-end #navx span{animation:none}
+@media(prefers-reduced-motion:reduce){#navx i,#navx span{animation:none}}
+#navx .on{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 2px 8px rgba(0,0,0,.18)}
+#navx a:active,#navx button:active{transform:scale(.93)}
+@media(max-width:360px){#navx{width:98vw;padding:7px 4px}#navx a,#navx button{font-size:9px}#navx i{font-size:17px}}
+.sx-box{height:auto;max-height:94dvh}
+.sx{position:fixed;inset:0;z-index:9995;display:none;background:rgba(8,10,20,.55)}
+.sx.show{display:block}
+.sx-box{position:absolute;left:50%;transform:translateX(-50%);bottom:0;top:6vh;width:min(100%,560px);background:var(--card-bg,#12141f);color:var(--text-main,#fff);border-radius:26px 26px 0 0;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border-soft,rgba(255,255,255,.1))}
+.sx-head{display:flex;align-items:center;gap:8px;padding:14px 16px 8px;font-weight:700;font-size:16px}
+.sx-head span{flex:1}
+.sx-x{border:0;background:rgba(127,127,127,.2);color:inherit;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px}
+.sx-q{margin:0 16px 8px;padding:12px 14px;border-radius:14px;border:1px solid var(--border-soft,rgba(255,255,255,.15));background:var(--input-bg,rgba(255,255,255,.07));color:inherit;font:inherit;font-size:14px;outline:0}
+.sx-body{overflow-y:auto;padding:4px 16px 110px;-webkit-overflow-scrolling:touch;flex:1}
+.sx-note{font-size:12px;opacity:.7;margin:0 0 10px;line-height:1.5}
+.gd-intro{font-size:12.5px;line-height:1.6;opacity:.9;margin:0 0 12px;padding:10px 12px;border:1px solid rgba(var(--brand-glow,0,200,83),.4);border-radius:14px;background:rgba(var(--brand-glow,0,200,83),.07)}
+.gd-sh{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 8px;padding:13px 14px;border:1px solid rgba(var(--brand-glow,0,200,83),.45);border-radius:16px;background:rgba(var(--brand-glow,0,200,83),.08);color:inherit;font:600 14.5px inherit;text-align:start;cursor:pointer}
+.gd-sh>span{font-size:18px}
+.gd-sh small{margin-inline-start:auto;background:linear-gradient(135deg,var(--brand-1,#00c853),var(--brand-2,#00e676));color:#04210f;border-radius:20px;padding:1px 10px;font-size:11.5px;font-weight:700}
+.gd-si{font-size:12.5px;opacity:.78;line-height:1.55;padding:0 6px 10px}
+.gd-cd{background:rgba(127,127,127,.12);border-radius:14px;margin:0 0 8px;overflow:hidden;content-visibility:auto;contain-intrinsic-size:auto 52px}
+.gd-ct{display:flex;gap:8px;align-items:center;width:100%;padding:12px 14px;border:0;background:none;color:inherit;font:600 14px inherit;text-align:start;cursor:pointer;word-break:break-all}
+.gd-ct b{color:var(--brand-2,#00e676);font-family:ui-monospace,Menlo,monospace;direction:ltr}
+.gd-ct span{margin-inline-start:auto;opacity:.6;font-size:11.5px;font-weight:400;white-space:nowrap}
+.gd-cb{display:none;padding:0 14px 14px;font-size:13px;line-height:1.6}
+.gd-cd.o .gd-cb{display:block}
+.gd-cb h4{margin:12px 0 4px;color:var(--brand-2,#00e676);font-size:12.5px}
+.gd-cb ol{list-style:none;margin:6px 0 0;padding:0}
+.gd-cb li{display:flex;gap:10px;margin:0 0 11px;align-items:flex-start}
+.gd-cb li>div{flex:1;min-width:0}
+.gd-n{flex:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--brand-1,#00c853),var(--brand-2,#00e676));color:#04210f;font:700 12px/22px inherit;text-align:center;margin-top:1px}
+.gd-code{display:block;margin-top:6px;padding:8px 10px;border-radius:10px;background:rgba(127,127,127,.25);font:600 13px ui-monospace,Menlo,monospace;direction:ltr;text-align:left;word-break:break-all;cursor:pointer}
+.gd-al{display:inline-block;margin:2px 3px 0 0;padding:1px 7px;border-radius:7px;background:rgba(var(--brand-glow,0,200,83),.18);font:600 12.5px ui-monospace,Menlo,monospace;direction:ltr}
+.gd-wn{margin-top:10px;padding:8px 10px;border-radius:10px;border-inline-start:3px solid #ffb347;background:rgba(255,179,71,.13);font-size:12.5px}
+.gd-tip{margin:10px 0 0;font-size:12px;opacity:.75}
+.gd-mo{display:block;margin:10px auto;padding:9px 24px;border:0;border-radius:30px;background:linear-gradient(135deg,var(--brand-1,#00c853),var(--brand-2,#00e676));color:#04210f;font:700 13px inherit;cursor:pointer}
+.fq{border:1px solid var(--border-soft,rgba(255,255,255,.1));border-radius:14px;margin-bottom:8px}
+.fq summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:14px}
+.fq p{margin:0;padding:0 14px 12px;font-size:13px;line-height:1.6;opacity:.85}
+
+#navx svg{width:22px;height:22px;flex:none;fill:url(#navg);filter:drop-shadow(0 1px 1.5px rgba(0,60,25,.55))}
+html body .menu-toggle-btn,html body.light-mode .menu-toggle-btn,html body.has-wallpaper .menu-toggle-btn{display:inline-flex!important;align-items:center;justify-content:center;padding:0!important;width:46px!important;height:46px!important;border-radius:50%!important;border:1px solid rgba(255,255,255,.4)!important;background:rgba(20,28,25,.55)!important;-webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important;box-shadow:0 4px 14px rgba(0,0,0,.3),inset 0 1px 1px rgba(255,255,255,.45)!important;animation:none!important}
+.menu-toggle-btn::after{display:none!important}
+.menu-toggle-btn .gear-ic{display:flex;line-height:0;filter:none}
+.menu-toggle-btn .gear-ic svg{width:27px;height:27px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55))}
+.sx-q{font-size:15px;padding:13px 14px 13px 42px;border-radius:16px;background-repeat:no-repeat;background-position:14px 50%;background-size:18px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300c853'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");border:1.5px solid rgba(0,200,83,.55)}
+.sx-q:focus{border-color:#00e676;box-shadow:0 0 0 3px rgba(0,230,118,.2)}
+
+.emoji-bg{position:fixed;inset:0;z-index:15;pointer-events:none;overflow:hidden}
+body.has-wallpaper .emoji-bg{display:none!important}
+.emoji-bg span{position:absolute;bottom:-40px;line-height:1;opacity:0;user-select:none;will-change:transform,opacity;animation:emojiBgRise linear infinite}
+@keyframes emojiBgRise{0%{transform:translate3d(0,0,0) rotate(0);opacity:0}12%{opacity:var(--eo,.22)}50%{transform:translate3d(var(--ex,18px),-55vh,0) rotate(14deg)}88%{opacity:var(--eo,.22)}100%{transform:translate3d(calc(var(--ex,18px) * -1),-112vh,0) rotate(-14deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.emoji-bg{display:none}}
+
+.top-controls{position:fixed!important;top:auto!important;left:auto!important;right:calc(50% - min(48vw,230px) + 4px)!important;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 84px)!important;z-index:9995;width:0;height:0;display:block}
+.top-controls .settings-dropdown{top:auto!important;bottom:0!important;right:0!important;width:min(260px,92vw)!important;max-height:min(62vh,420px)!important}
+@media(max-width:480px){#navx{padding:8px 3px;gap:0}#navx a,#navx button{font-size:9px;letter-spacing:-.1px;padding:8px 0 6px}#navx i{font-size:17px}#navx svg{width:20px;height:20px}}
+@media(max-width:340px){#navx a,#navx button{font-size:8px}#navx svg{width:18px;height:18px}}
+</style>
+
+<!-- alag files: asaani se edit karne ke liye (folder: /assets) -->
 </head>
 <body>
 
@@ -1341,7 +1396,7 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
     <div class="t">✦ درود شریف پڑھ لیں ✦</div>
     <div class="a">صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ</div>
     <div class="d"></div>
-    <button type="button" id="daroodSkip">Skip <i class="fas fa-forward"></i></button>
+    <button type="button" id="daroodSkip">Skip <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg></button>
   </div>
 </div>
 
@@ -1352,12 +1407,8 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
     h.classList.add('no-darood');
     try{sessionStorage.setItem('ahmad_simple_darood','1');}catch(e){}
   }
-  if(!h.classList.contains('no-darood')){
-    var tm=setTimeout(endDarood,1200);
-    function skip(e){ if(e){e.stopPropagation();} clearTimeout(tm); endDarood(); }
-    document.getElementById('daroodSkip').addEventListener('click',skip);
-    document.getElementById('gate').addEventListener('click',skip);
-  }
+  var sk=document.getElementById('daroodSkip');
+  if(sk)sk.addEventListener('click',function(e){e.stopPropagation();endDarood();});
 })();
 </script>
 
@@ -1387,88 +1438,7 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
           </a>
         </div>
 
-        <div class="top-controls">
-          <button class="menu-toggle-btn" id="menuToggleBtn" type="button" title="Settings Menu">
-            <span class="gear-ic" aria-hidden="true">⚙️</span>
-          </button>
-
-          <div class="settings-dropdown" id="settingsDropdown">
-            
-            <div class="settings-pane show" id="settingsMain">
-              <div class="settings-section-title">App Settings</div>
-              
-              <button class="setting-item" id="openLangMenuBtn">
-                <div class="setting-item-left"><i class="fas fa-language"></i> Language</div>
-                <i class="fas fa-chevron-right" style="font-size:10px;color:var(--text-muted);"></i>
-              </button>
-              
-              <button class="setting-item" id="openThemeMenuBtn">
-                <div class="setting-item-left"><i class="fas fa-palette"></i> Theme</div>
-                <i class="fas fa-chevron-right" style="font-size:10px;color:var(--text-muted);"></i>
-              </button>
-
-              <div class="settings-divider"></div>
-              <div class="settings-section-title">Tools</div>
-
-              <button class="setting-item" id="themeModeToggle">
-                <div class="setting-item-left"><i class="fas fa-moon" id="themeModeIcon"></i> Dark / Light Mode</div>
-                <span class="status-badge on" id="themeModeStatus">ON</span>
-              </button>
-
-              <button class="setting-item" id="soundToggle">
-                <div class="setting-item-left"><i class="fas fa-volume-up" id="soundIcon"></i> Sound Effects</div>
-                <span class="status-badge on" id="soundStatus">ON</span>
-              </button>
-
-              <button class="setting-item" id="eyeToggle">
-                <div class="setting-item-left"><i class="fas fa-glasses" id="eyeIcon"></i> Eye Safe</div>
-                <span class="status-badge" id="eyeStatus">OFF</span>
-              </button>
-
-              <button class="setting-item" id="wpPickBtn">
-                <div class="setting-item-left"><i class="fas fa-image"></i> Upload Wallpaper</div>
-              </button>
-
-              <button class="setting-item" id="wpRemoveBtn">
-                <div class="setting-item-left"><i class="fas fa-trash"></i> Remove Wallpaper</div>
-              </button>
-
-              <div class="settings-divider"></div>
-              <div class="settings-section-title">Extras</div>
-
-              <button class="setting-item" id="historyToggle">
-                <div class="setting-item-left"><i class="fas fa-history"></i> History</div>
-                <span class="badge-dot" id="historyDot"></span>
-              </button>
-
-              <button class="setting-item" id="favToggle">
-                <div class="setting-item-left"><i class="fas fa-star"></i> Favorites</div>
-                <span class="badge-dot" id="favDot"></span>
-              </button>
-
-              <button class="setting-item" id="referralToggle">
-                <div class="setting-item-left"><i class="fas fa-gift"></i> Refer & Earn</div>
-                <span class="ref-badge" id="refBadge">0</span>
-              </button>
-
-              <button class="setting-item" id="autoRotateToggle">
-                <div class="setting-item-left"><i class="fas fa-magic" id="autoRotateIcon"></i> Auto Theme</div>
-                <span class="status-badge" id="autoRotateStatus">OFF</span>
-              </button>
-            </div>
-
-            <div class="settings-pane" id="settingsLang">
-              <button class="back-btn" id="backToMainFromLang"><i class="fas fa-arrow-left"></i> Back to Settings</button>
-              <div id="langMenuContainer" style="display:flex; flex-direction:column; gap:2px;"></div>
-            </div>
-
-            <div class="settings-pane" id="settingsTheme">
-              <button class="back-btn" id="backToMainFromTheme"><i class="fas fa-arrow-left"></i> Back to Settings</button>
-              <div id="themeMenuContainer" style="display:flex; flex-direction:column; gap:2px;"></div>
-            </div>
-
-          </div>
-        </div>
+        
 
         <div class="logo-container" id="avatarWrap">
           <div class="logo-ring"></div>
@@ -1766,10 +1736,6 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
   </div>
 
 
-  <button class="tutorial-btn hidden" id="tutorialBtn" type="button" onclick="restartGuide()" title="Learn Tutorial">
-    <i class="fas fa-graduation-cap"></i>
-    <span class="tutorial-label" id="tutorialLabel">Learn</span>
-  </button>
 
   <div class="toast" id="toast">
     <i class="fas fa-check-circle"></i>
@@ -1779,6 +1745,97 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
   
 
   <div id="eyeOverlay"></div>
+<div class="top-controls">
+
+          <div class="settings-dropdown" id="settingsDropdown">
+            
+            <div class="settings-pane show" id="settingsMain">
+              <div class="settings-section-title">App Settings</div>
+              
+              <button class="setting-item" id="openLangMenuBtn">
+                <div class="setting-item-left"><i class="fas fa-language"></i> Language</div>
+                <i class="fas fa-chevron-right" style="font-size:10px;color:var(--text-muted);"></i>
+              </button>
+              
+              <button class="setting-item" id="openThemeMenuBtn">
+                <div class="setting-item-left"><i class="fas fa-palette"></i> Theme</div>
+                <i class="fas fa-chevron-right" style="font-size:10px;color:var(--text-muted);"></i>
+              </button>
+
+              <div class="settings-divider"></div>
+              <div class="settings-section-title">Tools</div>
+
+              <button class="setting-item" id="themeModeToggle">
+                <div class="setting-item-left"><i class="fas fa-moon" id="themeModeIcon"></i> Dark / Light Mode</div>
+                <span class="status-badge on" id="themeModeStatus">ON</span>
+              </button>
+
+              <button class="setting-item" id="soundToggle">
+                <div class="setting-item-left"><i class="fas fa-volume-up" id="soundIcon"></i> Sound Effects</div>
+                <span class="status-badge on" id="soundStatus">ON</span>
+              </button>
+
+              <button class="setting-item" id="eyeToggle">
+                <div class="setting-item-left"><i class="fas fa-glasses" id="eyeIcon"></i> Eye Safe</div>
+                <span class="status-badge" id="eyeStatus">OFF</span>
+              </button>
+
+              <button class="setting-item" id="wpPickBtn">
+                <div class="setting-item-left"><i class="fas fa-image"></i> Upload Wallpaper</div>
+              </button>
+
+              <button class="setting-item" id="wpRemoveBtn">
+                <div class="setting-item-left"><i class="fas fa-trash"></i> Remove Wallpaper</div>
+              </button>
+
+              <div class="settings-divider"></div>
+              <div class="settings-section-title">Extras</div>
+
+              <button class="setting-item" id="historyToggle">
+                <div class="setting-item-left"><i class="fas fa-history"></i> History</div>
+                <span class="badge-dot" id="historyDot"></span>
+              </button>
+
+              <button class="setting-item" id="favToggle">
+                <div class="setting-item-left"><i class="fas fa-star"></i> Favorites</div>
+                <span class="badge-dot" id="favDot"></span>
+              </button>
+
+              <button class="setting-item" id="referralToggle">
+                <div class="setting-item-left"><i class="fas fa-gift"></i> Refer & Earn</div>
+                <span class="ref-badge" id="refBadge">0</span>
+              </button>
+
+              <button class="setting-item" id="autoRotateToggle">
+                <div class="setting-item-left"><i class="fas fa-magic" id="autoRotateIcon"></i> Auto Theme</div>
+                <span class="status-badge" id="autoRotateStatus">OFF</span>
+              </button>
+            </div>
+
+            <div class="settings-pane" id="settingsLang">
+              <button class="back-btn" id="backToMainFromLang"><i class="fas fa-arrow-left"></i> Back to Settings</button>
+              <div id="langMenuContainer" style="display:flex; flex-direction:column; gap:2px;"></div>
+            </div>
+
+            <div class="settings-pane" id="settingsTheme">
+              <button class="back-btn" id="backToMainFromTheme"><i class="fas fa-arrow-left"></i> Back to Settings</button>
+              <div id="themeMenuContainer" style="display:flex; flex-direction:column; gap:2px;"></div>
+            </div>
+
+          </div>
+        </div>
+<nav id="navx" aria-label="Main">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="navg" x1="0" y1="0" x2="0" y2="1" spreadMethod="reflect"><stop offset="0" style="stop-color:#fff"/><stop offset=".3" style="stop-color:var(--brand-2)"/><stop offset=".6" style="stop-color:var(--brand-1)"/><stop offset=".85" style="stop-color:var(--brand-3)"/><stop offset="1" style="stop-color:#fff"/><animateTransform attributeName="gradientTransform" type="translate" values="0 -0.25;0 0.25;0 -0.25" dur="5s" repeatCount="indefinite"/></linearGradient></defs></svg>
+<button type="button" data-a="home" class="on"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span data-l="home">Home</span></button>
+<a data-a="ban" href="https://vip-banned.vercel.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8z"/></svg><span data-l="ban">Ban</span></a>
+<button type="button" data-a="unban"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/></svg><span data-l="unban">Unban</span></button>
+<a data-a="dp" href="https://fulldp-5a84481e822e.herokuapp.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg><span data-l="dp">Full DP</span></a>
+<button type="button" data-a="cmd"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg><span data-l="cmd">Commands</span></button>
+<a data-a="owner" href="https://wa.me/923147385565" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg><span data-l="owner">Owner</span></a>
+<button type="button" data-a="faq"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg><span data-l="faq">FAQ</span></button>
+<button type="button" id="menuToggleBtn" aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg><span data-l="set">Settings</span></button>
+</nav>
+
 
   <script>
     'use strict';
@@ -2659,7 +2716,7 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
       }
     }
 
-    function createEmojiFloat() {
+    function createEmojiFloat() { return;
       if (document.getElementById('emojiFloat')) return;
       const layer = document.createElement('div');
       layer.className = 'emoji-float'; layer.id = 'emojiFloat';
@@ -2997,7 +3054,7 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
     let guideActive = false;
     const GUIDE_STEPS = [
       { target: null, titleText: 'Welcome! 👋', text: 'guideWelcome', icon: 'fa-hand-sparkles', position: 'center' },
-      { target: 'menuToggleBtn', titleText: '⚙️ Settings Menu', text: 'guideQuickActionsText', icon: 'fa-bars', position: 'bottom' },
+      { target: 'menuToggleBtn', titleText: '⚙️ Settings Menu', text: 'guideQuickActionsText', icon: 'fa-bars', position: 'top' },
       { target: 'serverInfo', titleText: '⚡ Auto Server', text: 'guideServerText', icon: 'fa-server', position: 'bottom' },
       { target: 'autoServerBtn', titleText: '🔄 Auto New Server', text: 'guideAutoText', icon: 'fa-sync-alt', position: 'bottom' },
       { target: 'phoneNumber', titleText: '📱 WhatsApp Number', text: 'guidePhoneText', icon: 'fa-phone', position: 'bottom' },
@@ -3005,20 +3062,15 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
     ];
 
     function startInteractiveGuide() {
-      if (localStorage.getItem('ahmad_guide_done') === '1') {
-        document.getElementById('tutorialBtn').classList.remove('hidden');
-        return;
-      }
+      if (localStorage.getItem('ahmad_guide_done') === '1') return;
       guideActive = true;
       guideStep = 0;
-      document.getElementById('tutorialBtn').classList.add('hidden');
       document.getElementById('guideOverlay').classList.add('show');
       renderGuideStep();
     }
     function restartGuide() {
       guideStep = 0;
       guideActive = true;
-      document.getElementById('tutorialBtn').classList.add('hidden');
       document.getElementById('guideOverlay').classList.add('show');
       renderGuideStep();
     }
@@ -3111,7 +3163,6 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
       document.getElementById('guideHighlight').style.display = 'none';
       document.getElementById('guidePointer').style.display = 'none';
       document.getElementById('guideTooltip').classList.remove('show');
-      document.getElementById('tutorialBtn').classList.remove('hidden');
       try { localStorage.setItem('ahmad_guide_done', '1'); } catch (e) {}
     }
     window.addEventListener('resize', () => { if (guideActive) renderGuideStep(); });
@@ -3133,7 +3184,6 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
       $('spinSub').textContent = t('spinSub');
       $('spinBtnText').textContent = t('spinBtn');
       $('autoServerLabel').textContent = t('autoServerLabel');
-      $('tutorialLabel').textContent = t('tutorialLabel');
       const shareTextEl = document.querySelector('#shareBtn span');
       if (shareTextEl) shareTextEl.textContent = t('shareBtn');
       const retryTextEl = document.querySelector('#retryBtn span');
@@ -3771,7 +3821,6 @@ html.low-end .menu-toggle-btn,html.low-end .menu-toggle-btn::after{animation:non
     window.nextGuideStep = nextGuideStep;
     window.skipGuide = skipGuide;
     window.reselectRandomServer = reselectRandomServer;
-    window.restartGuide = restartGuide;
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
@@ -4214,5 +4263,172 @@ if(i.complete)go();else i.addEventListener('load',go);}catch(e){}})();
   })();
   </script>
 
+
+
+<div class="sx" id="sxCmd"><div class="sx-box"><div class="sx-head"><i class="fas fa-code"></i><span id="gdTitle">Ahmad MD – Command Guide</span><button class="sx-x" type="button">✕</button></div><input class="sx-q" id="sxQ" type="search" autocomplete="off"><div class="sx-body" id="sxCB"></div></div></div>
+<div class="sx" id="sxFaq"><div class="sx-box"><div class="sx-head"><i class="far fa-circle-question"></i><span data-l="faq">FAQ</span><button class="sx-x" type="button">✕</button></div><div class="sx-body" id="sxFB"></div></div></div>
+
+<script type="application/json" id="gdat"></script>
+<script id="navx-js">
+(function(){
+var P='.';
+var UI={
+en:{home:'Home',ban:'Ban',unban:'Unban',dp:'Full DP',cmd:'Commands',owner:'Owner',faq:'FAQ',set:'Settings',ph:'Search any command…',note:'Tap a command to see how to use it. Prefix is “.”',none:'No command found',what:'What it is for',how:'How to use',ex:'Example',copy:'Copy',use:'How to use',cnt:'commands'},
+ur:{home:'ہوم',ban:'بین',unban:'ان بین',dp:'فل ڈی پی',cmd:'کمانڈز',owner:'اونر',faq:'سوالات',set:'سیٹنگز',ph:'کوئی بھی کمانڈ تلاش کریں…',note:'استعمال دیکھنے کے لیے کمانڈ پر ٹیپ کریں۔ پری فکس “.” ہے',none:'کوئی کمانڈ نہیں ملی',what:'کس کام کے لیے ہے',how:'استعمال کا طریقہ',ex:'مثال',copy:'کاپی',use:'استعمال کا طریقہ',cnt:'کمانڈز'},
+rm:{home:'Home',ban:'Ban',unban:'Unban',dp:'Full DP',cmd:'Commands',owner:'Owner',faq:'FAQ',set:'Settings',ph:'Koi bhi command search karein…',note:'Istemal dekhne ke liye command par tap karein. Prefix “.” hai',none:'Koi command nahi mili',what:'Kis kaam ke liye hai',how:'Kaise use karein',ex:'Misal',copy:'Copy',use:'Kaise use karein',cnt:'commands'},
+hi:{home:'होम',ban:'बैन',unban:'अनबैन',dp:'फुल डीपी',cmd:'कमांड',owner:'ओनर',faq:'FAQ',set:'सेटिंग्स',ph:'कोई भी कमांड खोजें…',note:'उपयोग देखने के लिए कमांड पर टैप करें। प्रीफ़िक्स “.” है',none:'कोई कमांड नहीं मिली',what:'किस काम के लिए',how:'कैसे उपयोग करें',ex:'उदाहरण',copy:'कॉपी',use:'कैसे उपयोग करें',cnt:'कमांड'},
+ar:{home:'الرئيسية',ban:'حظر',unban:'فك الحظر',dp:'صورة كاملة',cmd:'الأوامر',owner:'المالك',faq:'أسئلة',set:'الإعدادات',ph:'ابحث عن أي أمر…',note:'اضغط على الأمر لمعرفة طريقة الاستخدام. البادئة “.”',none:'لا يوجد أمر',what:'الغرض',how:'طريقة الاستخدام',ex:'مثال',copy:'نسخ',use:'طريقة الاستخدام',cnt:'أمر'}};
+var MAP={ur:'ur',ur_roman:'rm',hi:'hi',ar_ma:'ar',ar_sa:'ar',ps:'ps',fa:'fa',bn:'bn',sw:'sw',sw_ug:'sw',ht:'ht',ha_ng:'ha'},RTL={ur:1,ar:1,ps:1,fa:1,ar_ma:1,ar_sa:1};
+function L(){var c=typeof currentLang!=='undefined'?currentLang:'en';return MAP[c]||'en'}
+function U(k){return (UI[L()]||UI.en)[k]||UI.en[k]}
+function rtl(){var c=typeof currentLang!=='undefined'?currentLang:'en';return !!RTL[c]}
+var X_UI={"ps":{"home":"کور","ban":"بین","unban":"ان بین","dp":"بشپړ ډي پي","cmd":"امرونه","owner":"مالک","faq":"پوښتنې","ph":"هر امر ولټوئ…","note":"د کارولو لپاره پر امر ټک کړئ. پریفکس “.” دی","none":"هیڅ امر ونه موندل شو","what":"د څه لپاره دی","how":"څنګه یې وکاروو","ex":"بېلګه","copy":"کاپي","use":"څنګه یې وکاروو","cnt":"امرونه"},"fa":{"home":"خانه","ban":"بن","unban":"آن‌بن","dp":"عکس کامل","cmd":"دستورها","owner":"مالک","faq":"پرسش‌ها","ph":"هر دستور را جستجو کنید…","note":"برای دیدن طرز استفاده روی دستور بزنید. پیشوند “.” است","none":"دستوری پیدا نشد","what":"برای چه کاری است","how":"طرز استفاده","ex":"مثال","copy":"کاپی","use":"طرز استفاده","cnt":"دستور"},"bn":{"home":"হোম","ban":"ব্যান","unban":"আনব্যান","dp":"ফুল ডিপি","cmd":"কমান্ড","owner":"মালিক","faq":"প্রশ্নোত্তর","ph":"যেকোনো কমান্ড খুঁজুন…","note":"ব্যবহার দেখতে কমান্ডে ট্যাপ করুন। প্রিফিক্স “.”","none":"কোনো কমান্ড পাওয়া যায়নি","what":"কীসের জন্য","how":"কীভাবে ব্যবহার করবেন","ex":"উদাহরণ","copy":"কপি","use":"কীভাবে ব্যবহার করবেন","cnt":"কমান্ড"},"sw":{"home":"Mwanzo","ban":"Ban","unban":"Unban","dp":"DP Kamili","cmd":"Amri","owner":"Mmiliki","faq":"Maswali","ph":"Tafuta amri yoyote…","note":"Gusa amri kuona jinsi ya kuitumia. Kiambishi ni “.”","none":"Hakuna amri iliyopatikana","what":"Inatumika kwa nini","how":"Jinsi ya kutumia","ex":"Mfano","copy":"Nakili","use":"Jinsi ya kutumia","cnt":"amri"},"ht":{"home":"Akèy","ban":"Ban","unban":"Unban","dp":"DP Konplè","cmd":"Kòmand","owner":"Mèt","faq":"Kesyon","ph":"Chèche nenpòt kòmand…","note":"Tape sou yon kòmand pou wè kijan pou itilize li. Prefiks la se “.”","none":"Pa gen kòmand ki jwenn","what":"Pou ki sa li ye","how":"Kijan pou itilize li","ex":"Egzanp","copy":"Kopye","use":"Kijan pou itilize li","cnt":"kòmand"},"ha":{"home":"Gida","ban":"Ban","unban":"Unban","dp":"DP Cikakke","cmd":"Umarni","owner":"Mamallaki","faq":"Tambayoyi","ph":"Nemo kowane umarni…","note":"Danna umarni don ganin yadda ake amfani da shi. Prefix shi ne “.”","none":"Ba a sami umarni ba","what":"Me ake amfani da shi","how":"Yadda ake amfani","ex":"Misali","copy":"Kwafi","use":"Yadda ake amfani","cnt":"umarni"}};
+for(var uk in X_UI)UI[uk]=X_UI[uk];
+var $=function(i){return document.getElementById(i)};
+function esc(x){return String(x).replace(/[&<>"]/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]})}
+var GT={
+en:{cg:"Command Guide",sub:"{n} commands, explained step by step",intro:"How to read: tap a section below, then tap a command. Each command shows what it does and how to use it, step by step. Commands start with a dot (.); the owner can change this symbol with .prefix.",ph:"Search a command (e.g. play, tagall)",more:"Show more ({n})",none:"No command found. Try another word.",what:"What it does",how:"How to use it, step by step",alias:"Other names (aliases)",names:"+{n} names",fmt:"Format",tip:"Nothing happens? Check the dot (.) at the start, the spelling, and send .alive to see if the bot is online.",o_own:"Open WhatsApp on the bot owner's number. This command works only from there.",o_grp:"Open the group where you want to use it. This command works only inside a group.",o_any:"Open WhatsApp and go to any chat or group where the bot is available.",adm:"Make sure you and the bot are both admins of that group (Group info, Participants, Make group admin).",rep:"Press and hold that message, photo, video or audio, then tap Reply.",repo:"If the command needs it, first reply to the photo, video, audio or message.",men:"Reply to the person's message, or write @ and pick the person from the list.",type1:"Type this in the message box:",type2:"Type this in the message box and replace the part in < > with your own:",typeq:"Type the command, one space, then your question. For example:",send:"Tap the Send button (the arrow).",res:"Wait a few seconds. The bot will reply to you.",resm:"Wait a few seconds. The bot will send you a photo or video.",n1:"Only the bot owner can use this.",n2:"Works only inside a group.",n3:"You must be a group admin (make the bot an admin too).",n4:"Adult humour; be careful.",p1:"<text or link>",p2:"<link or name>",q:"What is the capital of Pakistan?",orig:""},
+rm:{cg:"Command Guide",sub:"{n} commands, har command ek-ek step mein",intro:"Kaise parhein: neeche kisi bhi hisse (category) par tap karo, phir command par tap karo. Har command ke saath likha hai wo kya karti hai, kaise lagani hai, aur kis ki ijazat chahiye. Command ke shuru mein . (dot) lagta hai; owner .prefix se ye nishaan badal sakta hai.",ph:"Command dhoondo (jaise play, tagall)",more:"Aur dikhao ({n})",none:"Koi command nahi mili. Doosra lafz try karo.",what:"Ye kya karti hai?",how:"Kaise lagayen? (ek ek step)",alias:"Doosre naam (alias)",names:"+{n} naam",fmt:"Format",tip:"Kuch na ho to dekhein: shuru mein dot (.) ho, spelling theek ho, aur .alive likh kar dekhein bot online hai ya nahi.",o_own:"WhatsApp kholein, bot ke owner ke number se. Ye command sirf wahin se chalti hai.",o_grp:"Jis group mein chalani hai woh group kholein. Ye command sirf group ke andar chalti hai.",o_any:"WhatsApp kholein aur koi bhi chat ya group kholein jahan bot maujood hai.",adm:"Yaqeeni banayein ke aap aur bot dono us group ke admin hain (Group info, Participants, Make group admin).",rep:"Us message, photo, video ya audio par ungli rakh kar dabaye rakhein, phir Reply dabayein.",repo:"Zaroori ho to pehle us photo/video/audio/message ko reply karo.",men:"Us shakhs ke message par reply karein, ya @ likh kar list se us ko chunein.",type1:"Message box mein bilkul aise likhein:",type2:"Message box mein aise likhein aur < > wala hissa apni cheez se badal dein:",typeq:"Command likhein, ek space dein, phir apna sawal likhein. Misal:",send:"Send button (teer wala) dabayein.",res:"Chand second intezar karein. Bot aap ko jawab bhej dega.",resm:"Chand second intezar karein. Bot aap ko photo/video bhej dega.",n1:"Sirf bot owner chala sakta hai.",n2:"Sirf group ke andar chalta hai.",n3:"Group admin hona zaroori hai (bot ko bhi admin banayein).",n4:"Bade logon ka mazaq; ehtiyat karein.",p1:"<text ya link>",p2:"<link ya naam>",q:"Pakistan ka capital kya hai?",orig:"Plugin ki asli tareef (English)"},
+ur:{cg:"کمانڈ گائیڈ",sub:"{n} کمانڈز، ایک ایک قدم کر کے سمجھائی گئی",intro:"کیسے پڑھیں: نیچے کسی بھی حصے پر ٹیپ کریں، پھر کمانڈ پر ٹیپ کریں۔ ہر کمانڈ کے ساتھ لکھا ہے کہ وہ کیا کرتی ہے اور کیسے لگانی ہے۔ کمانڈ کے شروع میں نقطہ (.) لگتا ہے؛ اونر .prefix سے یہ نشان بدل سکتا ہے۔",ph:"کمانڈ تلاش کریں (جیسے play، tagall)",more:"مزید دکھائیں ({n})",none:"کوئی کمانڈ نہیں ملی۔ کوئی اور لفظ آزمائیں۔",what:"یہ کیا کرتی ہے؟",how:"کیسے لگائیں؟ (ایک ایک قدم)",alias:"دوسرے نام",names:"+{n} نام",fmt:"فارمیٹ",tip:"کچھ نہ ہو تو دیکھیں: شروع میں نقطہ (.) ہو، ہجے درست ہوں، اور .alive لکھ کر دیکھیں کہ بوٹ آن لائن ہے یا نہیں۔",o_own:"واٹس ایپ کھولیں، بوٹ کے اونر کے نمبر سے۔ یہ کمانڈ صرف وہیں سے چلتی ہے۔",o_grp:"جس گروپ میں چلانی ہے وہ گروپ کھولیں۔ یہ کمانڈ صرف گروپ کے اندر چلتی ہے۔",o_any:"واٹس ایپ کھولیں اور کوئی بھی چیٹ یا گروپ کھولیں جہاں بوٹ موجود ہو۔",adm:"یقینی بنائیں کہ آپ اور بوٹ دونوں اس گروپ کے ایڈمن ہیں (Group info، Participants، Make group admin)۔",rep:"اس میسج، فوٹو، ویڈیو یا آڈیو پر انگلی رکھ کر دبائے رکھیں، پھر Reply دبائیں۔",repo:"ضرورت ہو تو پہلے اس فوٹو/ویڈیو/آڈیو/میسج کو ریپلائی کریں۔",men:"اس شخص کے میسج پر ریپلائی کریں، یا @ لکھ کر فہرست سے اسے چنیں۔",type1:"میسج باکس میں بالکل ایسے لکھیں:",type2:"میسج باکس میں ایسے لکھیں اور < > والا حصہ اپنی چیز سے بدل دیں:",typeq:"کمانڈ لکھیں، ایک خالی جگہ دیں، پھر اپنا سوال لکھیں۔ مثال:",send:"Send بٹن (تیر والا) دبائیں۔",res:"چند سیکنڈ انتظار کریں۔ بوٹ آپ کو جواب بھیج دے گا۔",resm:"چند سیکنڈ انتظار کریں۔ بوٹ آپ کو فوٹو/ویڈیو بھیج دے گا۔",n1:"صرف بوٹ اونر چلا سکتا ہے۔",n2:"صرف گروپ کے اندر چلتی ہے۔",n3:"گروپ ایڈمن ہونا ضروری ہے (بوٹ کو بھی ایڈمن بنائیں)۔",n4:"بڑوں کا مذاق؛ احتیاط کریں۔",p1:"<ٹیکسٹ یا لنک>",p2:"<لنک یا نام>",q:"پاکستان کا دارالحکومت کیا ہے؟",orig:""},
+hi:{cg:"कमांड गाइड",sub:"{n} कमांड, एक-एक कदम में समझाई गईं",intro:"कैसे पढ़ें: नीचे किसी भी हिस्से पर टैप करें, फिर कमांड पर टैप करें। हर कमांड के साथ लिखा है कि वह क्या करती है और कैसे लगानी है। कमांड की शुरुआत में बिंदु (.) लगता है; ओनर .prefix से यह चिह्न बदल सकता है।",ph:"कमांड खोजें (जैसे play, tagall)",more:"और दिखाएँ ({n})",none:"कोई कमांड नहीं मिली। कोई और शब्द आज़माएँ।",what:"यह क्या करती है?",how:"कैसे लगाएँ? (एक-एक कदम)",alias:"दूसरे नाम",names:"+{n} नाम",fmt:"फ़ॉर्मेट",tip:"कुछ न हो तो देखें: शुरुआत में बिंदु (.) हो, स्पेलिंग सही हो, और .alive लिखकर देखें कि बॉट ऑनलाइन है या नहीं।",o_own:"WhatsApp खोलें, बॉट के ओनर के नंबर से। यह कमांड सिर्फ़ वहीं से चलती है।",o_grp:"जिस ग्रुप में चलानी है वह ग्रुप खोलें। यह कमांड सिर्फ़ ग्रुप के अंदर चलती है।",o_any:"WhatsApp खोलें और कोई भी चैट या ग्रुप खोलें जहाँ बॉट मौजूद है।",adm:"पक्का करें कि आप और बॉट दोनों उस ग्रुप के एडमिन हैं (Group info, Participants, Make group admin)।",rep:"उस मैसेज, फ़ोटो, वीडियो या ऑडियो पर उँगली रखकर दबाए रखें, फिर Reply दबाएँ।",repo:"ज़रूरत हो तो पहले उस फ़ोटो/वीडियो/ऑडियो/मैसेज को रिप्लाई करें।",men:"उस व्यक्ति के मैसेज पर रिप्लाई करें, या @ लिखकर सूची से उसे चुनें।",type1:"मैसेज बॉक्स में बिल्कुल ऐसे लिखें:",type2:"मैसेज बॉक्स में ऐसे लिखें और < > वाला हिस्सा अपनी चीज़ से बदल दें:",typeq:"कमांड लिखें, एक स्पेस दें, फिर अपना सवाल लिखें। मिसाल:",send:"Send बटन (तीर वाला) दबाएँ।",res:"कुछ सेकंड इंतज़ार करें। बॉट आपको जवाब भेज देगा।",resm:"कुछ सेकंड इंतज़ार करें। बॉट आपको फ़ोटो/वीडियो भेज देगा।",n1:"सिर्फ़ बॉट ओनर चला सकता है।",n2:"सिर्फ़ ग्रुप के अंदर चलती है।",n3:"ग्रुप एडमिन होना ज़रूरी है (बॉट को भी एडमिन बनाएँ)।",n4:"बड़ों का मज़ाक; सावधानी रखें।",p1:"<टेक्स्ट या लिंक>",p2:"<लिंक या नाम>",q:"पाकिस्तान की राजधानी क्या है?",orig:""},
+ar:{cg:"دليل الأوامر",sub:"{n} أمراً، مشروحة خطوة بخطوة",intro:"طريقة القراءة: اضغط على أي قسم بالأسفل ثم على أي أمر. يظهر لكل أمر ما يفعله وكيف تستخدمه خطوة بخطوة. تبدأ الأوامر بنقطة (.) ويمكن للمالك تغيير هذا الرمز بالأمر .prefix.",ph:"ابحث عن أمر (مثل play، tagall)",more:"عرض المزيد ({n})",none:"لم يتم العثور على أمر. جرّب كلمة أخرى.",what:"ماذا يفعل؟",how:"كيف تستخدمه؟ (خطوة بخطوة)",alias:"أسماء أخرى",names:"+{n} أسماء",fmt:"الصيغة",tip:"لا يحدث شيء؟ تأكد من النقطة (.) في البداية ومن الإملاء، ثم أرسل .alive لترى هل البوت متصل.",o_own:"افتح واتساب برقم مالك البوت. يعمل هذا الأمر من هناك فقط.",o_grp:"افتح المجموعة التي تريد استخدامه فيها. يعمل هذا الأمر داخل المجموعات فقط.",o_any:"افتح واتساب وادخل أي محادثة أو مجموعة فيها البوت.",adm:"تأكد أنك والبوت مشرفان في المجموعة (معلومات المجموعة ← المشاركون ← تعيين كمشرف).",rep:"اضغط مطولاً على الرسالة أو الصورة أو الفيديو أو الصوت ثم اضغط رد.",repo:"إذا لزم الأمر، قم أولاً بالرد على الصورة أو الفيديو أو الصوت أو الرسالة.",men:"ردّ على رسالة الشخص، أو اكتب @ واختره من القائمة.",type1:"اكتب هذا في مربع الرسالة تماماً:",type2:"اكتب هذا في مربع الرسالة واستبدل الجزء بين < > بما تريد:",typeq:"اكتب الأمر ثم مسافة ثم سؤالك. مثال:",send:"اضغط زر الإرسال (السهم).",res:"انتظر بضع ثوانٍ وسيرد عليك البوت.",resm:"انتظر بضع ثوانٍ وسيرسل لك البوت صورة أو فيديو.",n1:"يستخدمه مالك البوت فقط.",n2:"يعمل داخل المجموعة فقط.",n3:"يجب أن تكون مشرفاً (واجعل البوت مشرفاً أيضاً).",n4:"مزاح للكبار؛ كن حذراً.",p1:"<نص أو رابط>",p2:"<رابط أو اسم>",q:"ما هي عاصمة باكستان؟",orig:""},
+ps:{cg:"د کمانډونو لارښود",sub:"{n} کمانډونه، ګام په ګام تشریح شوي",intro:"څنګه ولولئ: لاندې پر هر برخه کلیک وکړئ، بیا پر یو کمانډ. هر کمانډ ښیي چې څه کوي او څنګه یې کارول کیږي. کمانډونه په ټکي (.) پیل کیږي؛ مالک کولی شي دا نښه په .prefix بدله کړي.",ph:"کمانډ ولټوئ (لکه play، tagall)",more:"نور وښایه ({n})",none:"کمانډ ونه موندل شو. بل کلمه هڅه وکړئ.",what:"دا څه کوي؟",how:"څنګه یې وکاروو؟ (ګام په ګام)",alias:"نور نومونه",names:"+{n} نومونه",fmt:"بڼه",tip:"که څه نه کیږي: په پیل کې ټکی (.) وګورئ، املا وګورئ، او .alive ولیکئ چې بوټ آنلاین دی که نه.",o_own:"واټساپ د بوټ د مالک له شمېرې خلاص کړئ. دا کمانډ یوازې له هغه ځایه کار کوي.",o_grp:"هغه ګروپ خلاص کړئ چېرته چې غواړئ یې وکاروئ. دا کمانډ یوازې په ګروپ کې کار کوي.",o_any:"واټساپ خلاص کړئ او هره چټ یا ګروپ ته ورشئ چېرته چې بوټ شته.",adm:"ډاډ ترلاسه کړئ چې تاسو او بوټ دواړه د ګروپ اډمین یاست.",rep:"پر هغه پیغام، انځور، ویډیو یا آډیو اوږد فشار ورکړئ، بیا Reply کېکاږئ.",repo:"که اړتیا وي، لومړی پر انځور/ویډیو/آډیو/پیغام ریپلای وکړئ.",men:"د هغه کس پر پیغام ریپلای وکړئ، یا @ ولیکئ او له لیست یې وټاکئ.",type1:"د پیغام په بکس کې دقیقاً دا ولیکئ:",type2:"د پیغام په بکس کې دا ولیکئ او د < > برخه په خپل شی بدله کړئ:",typeq:"کمانډ ولیکئ، یو واټن ورکړئ، بیا خپله پوښتنه ولیکئ. بېلګه:",send:"د لیږلو (Send) تڼۍ کېکاږئ.",res:"څو ثانیې انتظار وکړئ. بوټ به تاسو ته ځواب درولیږي.",resm:"څو ثانیې انتظار وکړئ. بوټ به تاسو ته انځور یا ویډیو درولیږي.",n1:"یوازې د بوټ مالک یې کارولی شي.",n2:"یوازې په ګروپ کې کار کوي.",n3:"باید د ګروپ اډمین اوسئ (بوټ هم اډمین کړئ).",n4:"د لویانو ټوکه؛ احتیاط وکړئ.",p1:"<متن یا لینک>",p2:"<لینک یا نوم>",q:"د پاکستان پلازمېنه څه ده؟",orig:""},
+fa:{cg:"راهنمای دستورها",sub:"{n} دستور، گام‌به‌گام توضیح داده شده",intro:"چطور بخوانیم: روی یکی از بخش‌های پایین بزنید و بعد روی یک دستور. برای هر دستور نوشته شده چه کار می‌کند و چگونه استفاده می‌شود. دستورها با نقطه (.) شروع می‌شوند؛ مالک می‌تواند این نماد را با .prefix عوض کند.",ph:"جستجوی دستور (مثل play، tagall)",more:"نمایش بیشتر ({n})",none:"دستوری پیدا نشد. کلمهٔ دیگری امتحان کنید.",what:"چه کار می‌کند؟",how:"چطور استفاده کنیم؟ (گام‌به‌گام)",alias:"نام‌های دیگر",names:"+{n} نام",fmt:"قالب",tip:"اتفاقی نیفتاد؟ نقطهٔ ابتدای دستور و املا را بررسی کنید و .alive بفرستید تا ببینید ربات آنلاین است.",o_own:"واتساپ را با شمارهٔ مالک ربات باز کنید. این دستور فقط از آنجا کار می‌کند.",o_grp:"گروهی را که می‌خواهید در آن استفاده کنید باز کنید. این دستور فقط داخل گروه کار می‌کند.",o_any:"واتساپ را باز کنید و وارد هر چت یا گروهی شوید که ربات در آن هست.",adm:"مطمئن شوید هم شما و هم ربات ادمین گروه هستید.",rep:"روی آن پیام، عکس، ویدیو یا صدا نگه دارید و سپس Reply را بزنید.",repo:"در صورت نیاز ابتدا روی عکس/ویدیو/صدا/پیام ریپلای کنید.",men:"روی پیام آن شخص ریپلای کنید یا @ بنویسید و او را از فهرست انتخاب کنید.",type1:"دقیقاً این را در کادر پیام بنویسید:",type2:"این را در کادر پیام بنویسید و بخش داخل < > را با مقدار خودتان عوض کنید:",typeq:"دستور را بنویسید، یک فاصله بگذارید و سپس سؤال خود را بنویسید. مثال:",send:"دکمهٔ ارسال (فلش) را بزنید.",res:"چند ثانیه صبر کنید. ربات برایتان پاسخ می‌فرستد.",resm:"چند ثانیه صبر کنید. ربات برایتان عکس یا ویدیو می‌فرستد.",n1:"فقط مالک ربات می‌تواند استفاده کند.",n2:"فقط داخل گروه کار می‌کند.",n3:"باید ادمین گروه باشید (ربات را هم ادمین کنید).",n4:"شوخی بزرگسالانه؛ احتیاط کنید.",p1:"<متن یا لینک>",p2:"<لینک یا نام>",q:"پایتخت پاکستان کجاست؟",orig:""},
+bn:{cg:"কমান্ড গাইড",sub:"{n}টি কমান্ড, ধাপে ধাপে বোঝানো",intro:"কীভাবে পড়বেন: নিচের যেকোনো অংশে ট্যাপ করুন, তারপর একটি কমান্ডে ট্যাপ করুন। প্রতিটি কমান্ডে লেখা আছে সেটি কী করে এবং কীভাবে ব্যবহার করবেন। কমান্ড ডট (.) দিয়ে শুরু হয়; ওনার .prefix দিয়ে এই চিহ্ন বদলাতে পারেন।",ph:"কমান্ড খুঁজুন (যেমন play, tagall)",more:"আরও দেখুন ({n})",none:"কোনো কমান্ড পাওয়া যায়নি। অন্য শব্দ চেষ্টা করুন।",what:"এটি কী করে?",how:"কীভাবে ব্যবহার করবেন? (ধাপে ধাপে)",alias:"অন্য নাম",names:"+{n}টি নাম",fmt:"ফরম্যাট",tip:"কিছু না হলে দেখুন: শুরুতে ডট (.) আছে কি না, বানান ঠিক আছে কি না, আর .alive লিখে দেখুন বট অনলাইন কি না।",o_own:"বটের ওনারের নম্বর থেকে WhatsApp খুলুন। এই কমান্ড শুধু সেখান থেকেই চলে।",o_grp:"যে গ্রুপে চালাতে চান সেটি খুলুন। এই কমান্ড শুধু গ্রুপের ভেতরে চলে।",o_any:"WhatsApp খুলে যেকোনো চ্যাট বা গ্রুপে যান যেখানে বট আছে।",adm:"নিশ্চিত করুন আপনি ও বট দুজনই ওই গ্রুপের অ্যাডমিন।",rep:"ওই মেসেজ, ছবি, ভিডিও বা অডিওতে চেপে ধরে রাখুন, তারপর Reply চাপুন।",repo:"দরকার হলে আগে ওই ছবি/ভিডিও/অডিও/মেসেজে রিপ্লাই করুন।",men:"ওই ব্যক্তির মেসেজে রিপ্লাই করুন, অথবা @ লিখে তালিকা থেকে বেছে নিন।",type1:"মেসেজ বক্সে হুবহু এটি লিখুন:",type2:"মেসেজ বক্সে এটি লিখুন এবং < > অংশটি নিজের কিছু দিয়ে বদলে দিন:",typeq:"কমান্ড লিখুন, একটি স্পেস দিন, তারপর আপনার প্রশ্ন লিখুন। উদাহরণ:",send:"Send বোতাম (তীর) চাপুন।",res:"কয়েক সেকেন্ড অপেক্ষা করুন। বট আপনাকে উত্তর পাঠাবে।",resm:"কয়েক সেকেন্ড অপেক্ষা করুন। বট আপনাকে ছবি বা ভিডিও পাঠাবে।",n1:"শুধু বটের ওনার ব্যবহার করতে পারেন।",n2:"শুধু গ্রুপের ভেতরে চলে।",n3:"গ্রুপ অ্যাডমিন হতে হবে (বটকেও অ্যাডমিন করুন)।",n4:"বড়দের রসিকতা; সতর্ক থাকুন।",p1:"<টেক্সট বা লিংক>",p2:"<লিংক বা নাম>",q:"পাকিস্তানের রাজধানী কী?",orig:""},
+sw:{cg:"Mwongozo wa Amri",sub:"Amri {n}, zimeelezwa hatua kwa hatua",intro:"Jinsi ya kusoma: gusa sehemu yoyote hapa chini, kisha gusa amri. Kila amri inaonyesha inafanya nini na jinsi ya kuitumia hatua kwa hatua. Amri huanza na nukta (.); mmiliki anaweza kubadilisha alama hii kwa .prefix.",ph:"Tafuta amri (mfano play, tagall)",more:"Onyesha zaidi ({n})",none:"Hakuna amri iliyopatikana. Jaribu neno lingine.",what:"Inafanya nini?",how:"Jinsi ya kuitumia (hatua kwa hatua)",alias:"Majina mengine",names:"+majina {n}",fmt:"Muundo",tip:"Hakuna kinachotokea? Angalia nukta (.) mwanzoni, tahajia, kisha tuma .alive kuona kama bot iko mtandaoni.",o_own:"Fungua WhatsApp kwa namba ya mmiliki wa bot. Amri hii inafanya kazi kutoka hapo tu.",o_grp:"Fungua kundi unalotaka kuitumia. Amri hii inafanya kazi ndani ya kundi tu.",o_any:"Fungua WhatsApp na uingie kwenye gumzo au kundi lolote lenye bot.",adm:"Hakikisha wewe na bot ni wasimamizi (admin) wa kundi hilo.",rep:"Bonyeza na ushikilie ujumbe, picha, video au sauti hiyo, kisha gusa Reply.",repo:"Ikihitajika, kwanza jibu (reply) picha, video, sauti au ujumbe huo.",men:"Jibu ujumbe wa mtu huyo, au andika @ na umchague kwenye orodha.",type1:"Andika hivi hasa kwenye kisanduku cha ujumbe:",type2:"Andika hivi kwenye kisanduku cha ujumbe na ubadilishe sehemu ya < > kwa yako:",typeq:"Andika amri, acha nafasi moja, kisha andika swali lako. Mfano:",send:"Gusa kitufe cha Send (mshale).",res:"Subiri sekunde chache. Bot itakujibu.",resm:"Subiri sekunde chache. Bot itakutumia picha au video.",n1:"Mmiliki wa bot pekee ndiye anaweza kuitumia.",n2:"Inafanya kazi ndani ya kundi tu.",n3:"Lazima uwe admin wa kundi (fanya bot pia kuwa admin).",n4:"Mzaha wa watu wazima; kuwa mwangalifu.",p1:"<maandishi au kiungo>",p2:"<kiungo au jina>",q:"Mji mkuu wa Pakistan ni upi?",orig:""},
+ht:{cg:"Gid Kòmand",sub:"{n} kòmand, eksplike etap pa etap",intro:"Kijan pou li: peze sou nenpòt seksyon anba a, apre sa sou yon kòmand. Chak kòmand montre sa li fè ak kijan pou itilize li etap pa etap. Kòmand yo kòmanse ak yon pwen (.); mèt la ka chanje senbòl sa a ak .prefix.",ph:"Chèche yon kòmand (tankou play, tagall)",more:"Montre plis ({n})",none:"Pa gen kòmand ki jwenn. Eseye yon lòt mo.",what:"Sa li fè?",how:"Kijan pou itilize li (etap pa etap)",alias:"Lòt non",names:"+{n} non",fmt:"Fòma",tip:"Pa gen anyen k ap pase? Tcheke pwen (.) nan kòmansman, òtograf la, epi voye .alive pou wè si bòt la anliy.",o_own:"Ouvri WhatsApp ak nimewo mèt bòt la. Kòmand sa a mache sèlman ladan l.",o_grp:"Ouvri gwoup kote ou vle itilize li. Kòmand sa a mache sèlman andedan yon gwoup.",o_any:"Ouvri WhatsApp epi ale nan nenpòt chat oswa gwoup kote bòt la ye.",adm:"Asire w ke ou menm ak bòt la se admin gwoup la.",rep:"Peze long sou mesaj, foto, videyo oswa odyo a, epi peze Reply.",repo:"Si sa nesesè, reponn dabò ak foto, videyo, odyo oswa mesaj la.",men:"Reponn mesaj moun nan, oswa ekri @ epi chwazi l nan lis la.",type1:"Ekri egzakteman sa nan bwat mesaj la:",type2:"Ekri sa nan bwat mesaj la epi ranplase pati < > a ak pa w:",typeq:"Ekri kòmand lan, kite yon espas, epi ekri kesyon w lan. Egzanp:",send:"Peze bouton Send (flèch la).",res:"Tann kèk segonn. Bòt la ap reponn ou.",resm:"Tann kèk segonn. Bòt la ap voye yon foto oswa videyo ba ou.",n1:"Se sèlman mèt bòt la ki ka itilize l.",n2:"Mache sèlman andedan yon gwoup.",n3:"Ou dwe admin gwoup la (fè bòt la admin tou).",n4:"Blag pou granmoun; fè atansyon.",p1:"<tèks oswa lyen>",p2:"<lyen oswa non>",q:"Ki kapital Pakistan?",orig:""},
+ha:{cg:"Jagorar Umarni",sub:"Umarni {n}, an bayyana mataki-mataki",intro:"Yadda ake karantawa: danna wani sashe a ƙasa, sannan ka danna umarni. Kowane umarni yana nuna abin da yake yi da yadda ake amfani da shi mataki-mataki. Umarni suna farawa da digo (.); mai bot zai iya canza wannan alama da .prefix.",ph:"Nemi umarni (misali play, tagall)",more:"Nuna ƙari ({n})",none:"Ba a sami umarni ba. Gwada wata kalma.",what:"Me yake yi?",how:"Yadda ake amfani da shi (mataki-mataki)",alias:"Wasu sunaye",names:"+sunaye {n}",fmt:"Tsari",tip:"Babu abin da ke faruwa? Duba digo (.) a farko, rubutun, sannan aika .alive don ganin ko bot yana kan layi.",o_own:"Buɗe WhatsApp da lambar mai bot. Wannan umarni yana aiki daga can kawai.",o_grp:"Buɗe rukunin da kake son amfani da shi. Wannan umarni yana aiki a cikin rukuni kawai.",o_any:"Buɗe WhatsApp ka shiga kowace hira ko rukuni da bot yake ciki.",adm:"Tabbatar kai da bot duka masu kula (admin) ne na rukunin.",rep:"Danna ka riƙe saƙon, hoton, bidiyon ko sautin, sannan ka danna Reply.",repo:"Idan ya zama dole, da farko ka amsa hoton, bidiyon, sautin ko saƙon.",men:"Amsa saƙon mutumin, ko rubuta @ ka zaɓe shi daga jerin.",type1:"Rubuta wannan daidai a akwatin saƙo:",type2:"Rubuta wannan a akwatin saƙo ka maye gurbin ɓangaren < > da naka:",typeq:"Rubuta umarnin, bar sarari ɗaya, sannan ka rubuta tambayarka. Misali:",send:"Danna maɓallin Send (kibiya).",res:"Jira daƙiƙa kaɗan. Bot zai amsa maka.",resm:"Jira daƙiƙa kaɗan. Bot zai aiko maka da hoto ko bidiyo.",n1:"Mai bot kawai zai iya amfani da shi.",n2:"Yana aiki a cikin rukuni kawai.",n3:"Dole ne ka zama admin na rukuni (ka mai da bot admin ma).",n4:"Barkwancin manya; ka yi hankali.",p1:"<rubutu ko hanyar haɗi>",p2:"<hanyar haɗi ko suna>",q:"Menene babban birnin Pakistan?",orig:""}
+};
+var ST={
+en:["Main (Bot basics)","AI Chat","Downloader & Search","Tools & Utility","Group Management","Settings","Owner Commands","Audio & Sounds","Image Tools","Islamic","Fun & Games","Group Relations (Random)","Reaction GIFs","Profile Pictures (DP)","Prank & Animation","Unban Appeal Texts"],
+ur:["مین (بوٹ کی بنیاد)","اے آئی چیٹ","ڈاؤنلوڈر اور سرچ","ٹولز اور یوٹیلیٹی","گروپ مینجمنٹ","سیٹنگز","اونر کمانڈز","آڈیو اور آوازیں","امیج ٹولز","اسلامی","تفریح اور گیمز","گروپ رشتے (رینڈم)","ری ایکشن GIFs","پروفائل پکچرز (DP)","مذاق اور اینیمیشن","ان بین اپیل ٹیکسٹ"],
+hi:["मुख्य (बॉट की बुनियाद)","AI चैट","डाउनलोडर और सर्च","टूल्स और यूटिलिटी","ग्रुप मैनेजमेंट","सेटिंग्स","ओनर कमांड","ऑडियो और आवाज़ें","इमेज टूल्स","इस्लामिक","मज़ा और गेम्स","ग्रुप रिश्ते (रैंडम)","रिएक्शन GIF","प्रोफ़ाइल पिक्चर (DP)","प्रैंक और एनिमेशन","अनबैन अपील टेक्स्ट"],
+ar:["الرئيسية (أساسيات البوت)","دردشة الذكاء الاصطناعي","التنزيل والبحث","الأدوات والمرافق","إدارة المجموعة","الإعدادات","أوامر المالك","الصوتيات والأصوات","أدوات الصور","إسلامي","الترفيه والألعاب","علاقات المجموعة (عشوائي)","صور GIF للتفاعل","صور الملف الشخصي (DP)","مقالب وحركات","نصوص طلب رفع الحظر"],
+ps:["اصلي (د بوټ بنسټ)","AI چټ","ډاونلوډر او لټون","وسایل او خدمتونه","د ګروپ مدیریت","تنظیمات","د مالک کمانډونه","آډیو او غږونه","د انځور وسایل","اسلامي","ساتیرۍ او لوبې","د ګروپ اړیکې (تصادفي)","د غبرګون GIF","د پروفایل انځورونه (DP)","ټوکې او انیمیشن","د بندیز لرې کولو غوښتنلیکونه"],
+fa:["اصلی (پایهٔ ربات)","چت هوش مصنوعی","دانلودر و جستجو","ابزارها و کاربردی","مدیریت گروه","تنظیمات","دستورهای مالک","صدا و آهنگ","ابزار تصویر","اسلامی","سرگرمی و بازی","روابط گروه (تصادفی)","گیف‌های واکنش","عکس پروفایل (DP)","شوخی و انیمیشن","متن درخواست رفع مسدودی"],
+bn:["মূল (বটের ভিত্তি)","এআই চ্যাট","ডাউনলোডার ও সার্চ","টুলস ও ইউটিলিটি","গ্রুপ ম্যানেজমেন্ট","সেটিংস","ওনার কমান্ড","অডিও ও শব্দ","ইমেজ টুলস","ইসলামিক","মজা ও গেমস","গ্রুপ সম্পর্ক (র‍্যান্ডম)","রিঅ্যাকশন GIF","প্রোফাইল ছবি (DP)","প্র্যাঙ্ক ও অ্যানিমেশন","আনব্যান আপিল টেক্সট"],
+sw:["Msingi (Mambo ya bot)","Gumzo la AI","Kupakua na Kutafuta","Zana na Huduma","Usimamizi wa Kundi","Mipangilio","Amri za Mmiliki","Sauti na Redio","Zana za Picha","Kiislamu","Burudani na Michezo","Mahusiano ya Kundi (Nasibu)","GIF za Hisia","Picha za Wasifu (DP)","Mizaha na Animesheni","Maandishi ya Kuondolewa Marufuku"],
+ht:["Prensipal (Baz bòt la)","Chat AI","Telechaje ak Rechèch","Zouti ak Itilite","Jesyon Gwoup","Paramèt","Kòmand Mèt","Odyo ak Son","Zouti Imaj","Islamik","Amizman ak Jwèt","Relasyon Gwoup (o aza)","GIF Reyaksyon","Foto Pwofil (DP)","Blag ak Animasyon","Tèks Apèl pou Debloke"],
+ha:["Babba (Tushen bot)","Hirar AI","Zazzagewa da Bincike","Kayan Aiki","Kula da Rukuni","Saituna","Umarnin Mai Bot","Sauti da Waƙoƙi","Kayan Hoto","Musulunci","Nishaɗi da Wasanni","Dangantakar Rukuni (Bazuwar)","GIF na Martani","Hotunan Bayanin Martaba (DP)","Wasa da Animashan","Rubutun Roƙon Cire Hani"]
+};
+var SI={
+en:["Basic commands to check that the bot is alive, how fast it is, and where the menu is.","Smart AI helpers. Write a question and the AI thinks and replies.","Give a link or a name and the bot fetches the video, song, picture or file for you.","Small everyday helpers: calculators, converters, stickers and more.","Powers for group admins: mention everyone, remove people, close the group and more.","Bot switches you can turn on or off with one command.","Only the bot owner can use these. Others are refused.","Toys for sound: change the voice of an audio or play fun sound effects.","Photo doctors: sharpen blurry photos, enlarge them, remove the background.","Duas, zikr, surahs, hadith and Islamic information. Send the command and the bot replies.","Just for fun: jokes and games to play with friends in a group.","The bot randomly picks a member of the group as your friend or relative (for fun).","Short anime GIFs like hug, kiss, slap. Reply to or tag someone.","Profile pictures: random boy, girl or couple DPs, or get someone's DP.","Only show-off animations (fake hacking, emoji rain). Nothing is really hacked.","If your WhatsApp number gets banned, the bot gives ready-made appeal text to send to support."],
+ur:["بنیادی کمانڈز: بوٹ زندہ ہے؟ کتنا تیز ہے؟ مینو کہاں ہے؟","ذہین اے آئی مددگار۔ سوال لکھیں، وہ سوچ کر جواب دے گا۔","لنک یا نام دیں، بوٹ ویڈیو، گانا، تصویر یا فائل لا دے گا۔","روزمرہ کے چھوٹے اوزار: کیلکولیٹر، کنورٹر، اسٹیکر وغیرہ۔","گروپ ایڈمن کی طاقتیں: سب کو بلانا، کسی کو نکالنا، گروپ بند کرنا وغیرہ۔","بوٹ کے سوئچ، جنہیں ایک کمانڈ سے آن یا آف کر سکتے ہیں۔","یہ صرف بوٹ کے مالک کے لیے ہیں۔ دوسرے کو بوٹ منع کر دیتا ہے۔","آواز کے کھلونے: آڈیو کی آواز بدلیں یا مزے دار ساؤنڈ چلائیں۔","تصویر کے ڈاکٹر: دھندلی تصویر صاف کریں، بڑی کریں، بیک گراؤنڈ ہٹائیں۔","دعائیں، ذکر، سورتیں، حدیث اور اسلامی معلومات۔ کمانڈ لکھیں، بوٹ جواب دے گا۔","صرف ہنسی مذاق: دوستوں کے ساتھ گروپ میں کھیلنے والے جوکس اور گیمز۔","بوٹ گروپ کے کسی رکن کو رینڈم آپ کا دوست یا رشتہ دار بناتا ہے (مذاق)۔","چھوٹی اینیمی GIFs جیسے hug، kiss، slap۔ کسی کو ٹیگ یا ریپلائی کریں۔","پروفائل پکچرز: رینڈم لڑکے، لڑکی یا کپل DP، یا کسی کی DP نکالیں۔","یہ صرف دکھاوے کی اینیمیشنز ہیں۔ اصل میں کچھ ہیک نہیں ہوتا۔","اگر واٹس ایپ نمبر بین ہو جائے تو بوٹ تیار شدہ اپیل ٹیکسٹ دیتا ہے۔"],
+hi:["बुनियादी कमांड: बॉट ज़िंदा है? कितना तेज़ है? मेन्यू कहाँ है?","समझदार AI साथी। सवाल लिखें, वह सोचकर जवाब देगा।","लिंक या नाम दें, बॉट वीडियो, गाना, तस्वीर या फ़ाइल ला देगा।","रोज़मर्रा के छोटे औज़ार: कैलकुलेटर, कन्वर्टर, स्टिकर वगैरह।","ग्रुप एडमिन की ताक़तें: सबको बुलाना, किसी को निकालना, ग्रुप बंद करना वगैरह।","बॉट के स्विच, जिन्हें एक कमांड से ऑन या ऑफ़ कर सकते हैं।","ये सिर्फ़ बॉट के मालिक के लिए हैं। दूसरों को बॉट मना कर देता है।","आवाज़ के खिलौने: ऑडियो की आवाज़ बदलें या मज़ेदार साउंड चलाएँ।","तस्वीर के डॉक्टर: धुंधली फ़ोटो साफ़ करें, बड़ी करें, बैकग्राउंड हटाएँ।","दुआएँ, ज़िक्र, सूरतें, हदीस और इस्लामी जानकारी। कमांड लिखें, बॉट जवाब देगा।","सिर्फ़ हँसी-मज़ाक: दोस्तों के साथ ग्रुप में खेलने वाले जोक्स और गेम्स।","बॉट ग्रुप के किसी सदस्य को रैंडम आपका दोस्त या रिश्तेदार बनाता है (मज़ाक)।","छोटे एनीमे GIF जैसे hug, kiss, slap। किसी को टैग या रिप्लाई करें।","प्रोफ़ाइल पिक्चर: रैंडम लड़के, लड़की या कपल DP, या किसी की DP निकालें।","ये सिर्फ़ दिखावे के एनिमेशन हैं। असल में कुछ हैक नहीं होता।","अगर WhatsApp नंबर बैन हो जाए तो बॉट तैयार अपील टेक्स्ट देता है।"],
+ar:["أوامر أساسية: هل البوت يعمل؟ ما سرعته؟ أين القائمة؟","مساعدون أذكياء. اكتب سؤالك فيفكر ويرد.","أعطِ رابطاً أو اسماً فيجلب البوت الفيديو أو الأغنية أو الصورة أو الملف.","أدوات يومية صغيرة: آلة حاسبة ومحوّلات وملصقات وغيرها.","صلاحيات مشرف المجموعة: منشن للجميع وطرد عضو وإغلاق المجموعة وغيرها.","مفاتيح البوت التي تشغّلها أو تطفئها بأمر واحد.","هذه لمالك البوت فقط. يرفضها البوت لغيره.","ألعاب الصوت: غيّر صوت المقطع أو شغّل مؤثرات ممتعة.","أطباء الصور: توضيح الصور الضبابية وتكبيرها وإزالة الخلفية.","أدعية وأذكار وسور وأحاديث ومعلومات إسلامية. اكتب الأمر فيرد البوت.","للمرح فقط: نكات وألعاب مع الأصدقاء في المجموعة.","يختار البوت عضواً عشوائياً من المجموعة ليكون صديقك أو قريبك (للمزاح).","صور GIF أنمي قصيرة مثل عناق وقبلة وصفعة. ردّ على شخص أو اذكره.","صور الملف الشخصي: صور عشوائية لولد أو بنت أو ثنائي، أو استخرج صورة شخص.","مجرد حركات استعراضية. لا يتم اختراق أي شيء فعلاً.","إذا حُظر رقم واتساب يعطيك البوت نص استئناف جاهزاً."]
+};
+
+var FAQ=[
+['How do I get a pairing code?','Enter your WhatsApp number with country code (e.g. 92 for Pakistan) on the Home screen and tap Generate Pair Code. Then in WhatsApp go to Linked Devices → Link with phone number and type the code within 30 seconds.','پیئرنگ کوڈ کیسے ملے گا؟','ہوم اسکرین پر کنٹری کوڈ کے ساتھ اپنا واٹس ایپ نمبر لکھیں اور Generate Pair Code دبائیں۔ پھر واٹس ایپ میں Linked Devices → Link with phone number میں 30 سیکنڈ کے اندر کوڈ لکھ دیں۔','Pairing code kaise milega?','Home par country code ke saath number likhein aur Generate Pair Code dabayein. Phir WhatsApp > Linked Devices > Link with phone number mein 30 second ke andar code likh dein.'],
+['The code does not work / expired','Codes expire quickly. Check the number has the country code, tap Auto New Server or pick another server, and generate a fresh code.','کوڈ کام نہیں کر رہا / ایکسپائر ہو گیا','کوڈ جلد ایکسپائر ہو جاتا ہے۔ نمبر میں کنٹری کوڈ چیک کریں، سرور بدلیں اور نیا کوڈ بنائیں۔','Code kaam nahi kar raha / expire','Code jaldi expire hota hai. Number mein country code check karein, server badlein aur naya code banayein.'],
+['What is the command prefix?','The prefix is “.” (dot). Write .menu to see the menu, .ping to test speed. The owner can change it with .prefix.','کمانڈ کا پری فکس کیا ہے؟','پری فکس “.” (ڈاٹ) ہے۔ .menu مینو دکھاتی ہے اور .ping رفتار۔ اونر اسے .prefix سے بدل سکتا ہے۔','Prefix kya hai?','Prefix “.” (dot) hai. .menu se menu, .ping se speed. Owner .prefix se badal sakta hai.'],
+['How do I open a view-once photo?','Reply to the one-time photo/video with .vv (owner only). The bot sends it back as a normal photo/video that stays open.','ایک بار والی تصویر کیسے کھولیں؟','ایک بار والی تصویر/ویڈیو پر ریپلائی کر کے .vv لکھیں (صرف اونر)۔ بوٹ اسے عام تصویر بنا کر بھیج دے گا۔','View-once photo kaise kholein?','Ek baar wali photo/video par reply karke .vv likhein (sirf owner). Bot normal photo bana kar bhej dega.'],
+['How can I get a banned number unbanned?','Tap Unban in the bottom bar, enter the number and your name, then send the ready email to WhatsApp support. The decision is WhatsApp’s.','بین نمبر ان بین کیسے ہو؟','نیچے بار میں Unban دبائیں، نمبر اور نام لکھیں اور تیار ای میل واٹس ایپ سپورٹ کو بھیجیں۔ فیصلہ واٹس ایپ کا ہوتا ہے۔','Banned number unban kaise hoga?','Neeche Unban dabayein, number aur naam likhein aur ready email WhatsApp support ko bhejein. Faisla WhatsApp ka hota hai.'],
+['How do I contact the owner?','Tap Owner in the bottom bar to open WhatsApp chat with 0314 7385565.','اونر سے رابطہ کیسے کریں؟','نیچے بار میں Owner دبائیں، 0314 7385565 پر واٹس ایپ چیٹ کھل جائے گی۔','Owner se rabta kaise karein?','Neeche Owner dabayein, 0314 7385565 par WhatsApp chat khul jayegi.']];
+function rF(){var i=L()==='ur'?3:L()==='rm'?5:0;$('sxFaq').dir=rtl()?'rtl':'ltr';$('sxFB').innerHTML=FAQ.map(function(f){return '<details class="fq"><summary>'+esc(f[i])+'</summary><p>'+esc(f[i+1])+'</p></details>'}).join('')}
+/* ===== Ahmad MD Command Guide (language aware, English by default) ===== */
+var DB=null,gq=$('sxQ'),gcb=$('sxCB'),gOpen=-1,built='',fb='';
+function G(k){var l=L();return (GT[l]&&GT[l][k])||GT.en[k]||''}
+function gdb(){if(!DB){var t=$('gdat').textContent;if(!t){try{var x=new XMLHttpRequest();x.open('GET','/gdat.json',false);x.send();t=x.responseText}catch(e){}}try{DB=JSON.parse(t)}catch(e){DB={s:[],d:[]}}}return DB}
+function sTitle(i){var l=L();return l==='rm'?gdb().s[i][3]:((ST[l]||ST.en)[i]||ST.en[i])}
+function sIntro(i){var l=L();return l==='rm'?gdb().s[i][4]:((SI[l]||SI.en)[i]||SI.en[i])}
+function gDesc(o){return L()==='rm'?(o[3]||o[4]):(o[4]||o[3])}
+function gCode(o){return (o[5]||('.'+o[1])).replace('{1}',G('p1')).replace('{2}',G('p2')).replace('{q}',G('q'))}
+function gCard(o){
+  var f=o[6],a=o[2],c=o[5]||'',code=gCode(o),kind=c.indexOf('{q}')>-1?'q':(/\{[12]\}|</.test(c)?'t':'p'),st=[],h,l=L();
+  st.push([f&2?G('o_grp'):(f&1?G('o_own'):G('o_any'))]);
+  if(f&4)st.push([G('adm')]);
+  if(f&16)st.push([G('rep')]);else if(f&32)st.push([G('men')]);else if(f&64)st.push([G('repo')]);
+  st.push([kind==='q'?G('typeq'):(kind==='t'?G('type2'):G('type1')),code]);
+  st.push([G('send')]);st.push([f&128?G('resm'):G('res')]);
+  h='<div class="gd-cd"><button type="button" class="gd-ct"><b>'+(/^[a-z0-9_]+$/i.test(o[1])||o[1].indexOf(' ')<0?'.':'')+esc(o[1])+'</b>'+(a.length?'<span>'+esc(G('names').replace('{n}',a.length))+'</span>':'')+'</button><div class="gd-cb">';
+  h+='<h4>'+esc(G('what'))+'</h4>'+esc(gDesc(o));
+  h+='<h4>'+esc(G('how'))+'</h4><ol>'+st.map(function(s,i){return '<li><span class="gd-n">'+(i+1)+'</span><div>'+esc(s[0])+(s[1]?'<code class="gd-code" data-c="'+esc(s[1])+'">'+esc(s[1])+'</code>':'')+'</div></li>'}).join('')+'</ol>';
+  if(o[7])h+='<h4>'+esc(G('fmt'))+'</h4><code class="gd-code" data-c="'+esc(o[7])+'">'+esc(o[7])+'</code>';
+  if(a.length)h+='<h4>'+esc(G('alias'))+'</h4>'+a.map(function(x){return '<code class="gd-al">.'+esc(x)+'</code>'}).join(' ');
+  if(l==='rm'&&o[4]&&o[4]!==o[3])h+='<h4>'+esc(G('orig'))+'</h4>'+esc(o[4]);
+  var nt=[];if(f&1)nt.push(G('n1'));if(f&2)nt.push(G('n2'));if(f&4)nt.push(G('n3'));if(f&8)nt.push(G('n4'));
+  if(nt.length)h+='<div class="gd-wn">\u26A0\uFE0F '+nt.map(esc).join('<br>\u26A0\uFE0F ')+'</div>';
+  return h+'<p class="gd-tip">'+esc(G('tip'))+'</p></div></div>';
+}
+function gFill(box,arr,n){
+  box._a=arr;box._i=0;
+  box._go=function(){var e=Math.min(box._i+n,arr.length),h='',b=box.querySelector('.gd-mo');
+    for(;box._i<e;box._i++)h+=gCard(arr[box._i]);
+    if(b)b.remove();box.insertAdjacentHTML('beforeend',h);
+    if(box._i<arr.length)box.insertAdjacentHTML('beforeend','<button type="button" class="gd-mo">'+esc(G('more').replace('{n}',arr.length-box._i))+'</button>')};
+  box._go();
+}
+function gList(){
+  var d=gdb(),h='<p class="gd-intro"><b>'+esc(G('sub').replace('{n}',d.d.length))+'</b><br>'+esc(G('intro'))+'</p>';
+  h+=d.s.map(function(s,i){return '<div class="gd-sec" data-i="'+i+'"><button type="button" class="gd-sh"><span>'+s[1]+'</span>'+esc(sTitle(i))+'<small>'+s[2]+'</small></button><div class="gd-bx" hidden><div class="gd-si">'+esc(sIntro(i))+'</div><div class="gd-cs"></div></div></div>'}).join('');
+  return h+'<div id="gdRes" hidden></div>';
+}
+function render(){
+  var term=gq.value.trim().toLowerCase().replace(/^\./,''),d=gdb(),res;
+  gq.placeholder=G('ph');$('sxCmd').dir=rtl()?'rtl':'ltr';$('gdTitle').textContent='Ahmad MD \u2013 '+G('cg');
+  gcb.innerHTML=gList();res=$('gdRes');
+  var secs=gcb.querySelectorAll('.gd-sec');
+  if(term){
+    var m=d.d.filter(function(o){return o[1].toLowerCase().indexOf(term)>-1||o[2].some(function(a){return a.toLowerCase().indexOf(term)>-1})||(o[3]||'').toLowerCase().indexOf(term)>-1||(o[4]||'').toLowerCase().indexOf(term)>-1});
+    for(var i=0;i<secs.length;i++)secs[i].hidden=true;gcb.querySelector('.gd-intro').hidden=true;
+    res.hidden=false;if(m.length)gFill(res,m,20);else res.innerHTML='<p class="gd-intro">'+esc(G('none'))+'</p>';
+  }else if(gOpen>-1&&secs[gOpen]){var s=secs[gOpen];s.querySelector('.gd-bx').hidden=false;gFill(s.querySelector('.gd-cs'),d.d.filter(function(o){return o[0]===gOpen}),25)}
+  built=L()+gq.value;
+}
+function gBuzz(){try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}}
+gcb.addEventListener('click',function(e){var t=e.target,x;
+  if(x=t.closest('.gd-code')){try{navigator.clipboard.writeText(x.dataset.c)}catch(z){}x.style.outline='2px solid #00e676';setTimeout(function(){x.style.outline=''},600);gBuzz();return}
+  if(x=t.closest('.gd-mo')){x.parentNode._go();return}
+  if(x=t.closest('.gd-ct')){x.parentNode.classList.toggle('o');return}
+  if(x=t.closest('.gd-sh')){var w=x.parentNode,bx=w.querySelector('.gd-bx'),cs=w.querySelector('.gd-cs'),i=+w.dataset.i;
+    if(bx.hidden){bx.hidden=false;gOpen=i;if(!cs.firstChild)gFill(cs,gdb().d.filter(function(o){return o[0]===i}),25)}else{bx.hidden=true;gOpen=-1}}
+});
+var gtm;gq.addEventListener('input',function(){clearTimeout(gtm);gtm=setTimeout(render,140)});
+
+function lbl(){document.querySelectorAll('[data-l]').forEach(function(e){e.textContent=U(e.dataset.l)})}
+function shut(){document.querySelectorAll('.sx.show').forEach(function(x){x.classList.remove('show')})}
+function act(a){document.querySelectorAll('#navx .on').forEach(function(x){x.classList.remove('on')});var b=document.querySelector('#navx [data-a='+a+']');if(b)b.classList.add('on')}
+$('navx').addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b)return;var a=b.dataset.a;
+  if(a==='home'){shut();window.scrollTo({top:0});act('home')}
+  else if(a==='unban'){shut();var u=$('unbanBtn2');if(u)u.click()}
+  else if(a==='cmd'){shut();if(built!==L()+gq.value)render();$('sxCmd').classList.add('show');act('cmd')}
+  else if(a==='faq'){shut();if(fb!==L())rF();$('sxFaq').classList.add('show');act('faq')}});
+document.querySelectorAll('.sx').forEach(function(x){x.addEventListener('click',function(e){if(e.target===x||e.target.closest('.sx-x')){x.classList.remove('show');act('home')}})});
+var _f=rF;rF=function(){_f();fb=L()};
+function again(){lbl();render();rF()}
+(window.requestIdleCallback||function(f){setTimeout(f,400)})(function(){render();rF()});
+['touchstart','mousedown','pointerover'].forEach(function(ev){$('navx').addEventListener(ev,function(e){var a=e.target.closest('a[href]');if(a&&!a.dataset.pf){a.dataset.pf=1;var l=document.createElement('link');l.rel='prefetch';l.href=a.href;document.head.appendChild(l)}},{passive:true})});
+var w=window.switchLang;if(typeof w==='function'){window.switchLang=function(){var r=w.apply(this,arguments);again();return r}}
+lbl();
+})();
+</script>
+<script>
+(function(){var b=document.getElementById('menuToggleBtn'),d=document.getElementById('settingsDropdown');if(!b||!d)return;
+new MutationObserver(function(){b.classList.toggle('on',d.classList.contains('show'))}).observe(d,{attributes:true,attributeFilter:['class']});
+function warm(){try{fetch('/gdat.json',{priority:'low'}).catch(function(){})}catch(e){}}
+addEventListener('load',function(){(window.requestIdleCallback||setTimeout)(warm,{timeout:4000})});})();
+</script>
+<script src="/channel-sale.js" defer></script>
+<script>
+/* Udte halke emojis: wallpaper na ho tab. Idle waqt bante hain taake page foran khule. */
+(function(){
+  var C={list:['\uD83D\uDC7B','\u2B50','\uD83D\uDC97','\u2764\uFE0F\u200D\uD83E\uDE79','\uD83D\uDC8B','\uD83E\uDEC0','\uD83D\uDC40','\uD83C\uDFA8','\uD83C\uDF42','\uD83C\uDF38','\uD83C\uDF0D','\uD83E\uDE7A'],countMobile:16,countDesktop:26,sizeMin:14,sizeMax:26,opacityMin:.14,opacityMax:.30,speedMin:14,speedMax:28};
+  function r(a,b){return a+Math.random()*(b-a)}
+  function go(){
+    var d=document, low=d.documentElement.classList.contains('low-end');
+    if(d.getElementById('emojiBg')) return;
+    var n=innerWidth<580?C.countMobile:C.countDesktop; if(low) n=5;
+    var L=d.createElement('div'); L.className='emoji-bg'; L.id='emojiBg'; L.setAttribute('aria-hidden','true');
+    for(var i=0;i<n;i++){var s=d.createElement('span');s.textContent=C.list[i%C.list.length];
+      s.style.left=r(3,94).toFixed(1)+'%';s.style.fontSize=r(C.sizeMin,C.sizeMax).toFixed(0)+'px';
+      s.style.animationDuration=r(C.speedMin,C.speedMax).toFixed(1)+'s';s.style.animationDelay=(-r(0,C.speedMax)).toFixed(1)+'s';
+      s.style.setProperty('--eo',r(C.opacityMin,C.opacityMax).toFixed(2));s.style.setProperty('--ex',r(-24,24).toFixed(0)+'px');L.appendChild(s)}
+    d.body.appendChild(L)
+  }
+  function start(){ if(window.requestIdleCallback) requestIdleCallback(go,{timeout:2500}); else setTimeout(go,1200) }
+  if(document.readyState==='complete') start(); else addEventListener('load',start);
+})();
+</script>
 </body>
 </html>
