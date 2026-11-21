@@ -2,12 +2,14 @@
 // - page: shown INSTANTLY from the saved copy, refreshed quietly in the background
 // - fonts / icons from CDNs: saved after the first load
 // - /api/* is never cached (stats and codes must always be live)
-const CACHE = 'ahmad-md-v10';
+const CACHE = 'ahmad-md-v11';
 const CDN = ['cdnjs.cloudflare.com', 'cdn.jsdelivr.net', 'fonts.googleapis.com', 'fonts.gstatic.com'];
 const PRECACHE = [
   '/',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2'
 ];
 
 self.addEventListener('install', e => {
