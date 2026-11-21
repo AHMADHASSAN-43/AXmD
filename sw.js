@@ -2,7 +2,7 @@
 // - page: shown INSTANTLY from the saved copy, refreshed quietly in the background
 // - fonts / icons from CDNs: saved after the first load
 // - /api/* is never cached (stats and codes must always be live)
-const CACHE = 'ahmad-md-v11';
+const CACHE = 'ahmad-md-v12';
 const CDN = ['cdnjs.cloudflare.com', 'cdn.jsdelivr.net', 'fonts.googleapis.com', 'fonts.gstatic.com'];
 const PRECACHE = [
   '/',
