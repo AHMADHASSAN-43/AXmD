@@ -29,6 +29,8 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2" crossorigin>
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://wa.me">
@@ -1788,6 +1790,10 @@ body.has-wallpaper .emoji-bg{display:none!important}
                 <div class="setting-item-left"><i class="fas fa-trash"></i> Remove Wallpaper</div>
               </button>
 
+              <button class="setting-item setting-clear" id="clearAllBtn" type="button">
+                <div class="setting-item-left"><i class="fas fa-broom"></i> Clear All Data</div>
+              </button>
+
               <div class="settings-divider"></div>
               <div class="settings-section-title">Extras</div>
 
@@ -2861,17 +2867,22 @@ body.has-wallpaper .emoji-bg{display:none!important}
         box.appendChild(d); return;
       }
       const shown = limit ? list.slice(0, limit) : list;
-      const max = Math.max(...list.map(c => c.count), 1);
+      const total = list.reduce((a, c) => a + c.count, 0) || 1;
+      const pctOf = c => c.count / total * 100;
+      const pctTxt = c => { const v = pctOf(c); return (v > 0 && v < 0.1 ? '<0.1' : v >= 10 ? v.toFixed(0) : v.toFixed(1)) + '%'; };
       shown.forEach(c => {
         const row = document.createElement('div'); row.className = 'lb-row';
         const nm = document.createElement('span'); nm.className = 'lb-name'; nm.textContent = countryLabel(c);
         const tr = document.createElement('div'); tr.className = 'lb-track';
         const fill = document.createElement('div'); fill.className = 'lb-fill';
         tr.appendChild(fill);
-        const num = document.createElement('span'); num.className = 'lb-num'; num.textContent = c.count.toLocaleString();
+        const num = document.createElement('span'); num.className = 'lb-num';
+        const pb = document.createElement('b'); pb.textContent = pctTxt(c);
+        const pn = document.createElement('small'); pn.textContent = c.count.toLocaleString();
+        num.append(pb, pn);
         row.append(nm, tr, num);
         box.appendChild(row);
-        requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = Math.max(c.count / max * 100, 3) + '%'; }));
+        requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = Math.max(pctOf(c), 3) + '%'; }));
       });
     }
     function showListMsg(box, key) {
@@ -4428,6 +4439,157 @@ addEventListener('load',function(){(window.requestIdleCallback||setTimeout)(warm
   }
   function start(){ if(window.requestIdleCallback) requestIdleCallback(go,{timeout:2500}); else setTimeout(go,1200) }
   if(document.readyState==='complete') start(); else addEventListener('load',start);
+})();
+</script>
+
+<style id="v11-css">
+/* ---- instant taps on mobile (no 300ms delay, no grey flash) ---- */
+a,button,input,label,select,textarea,.setting-item,.social-item,.action-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+
+/* ---- cover camera: moved from top to bottom ---- */
+.cover-edit{top:auto!important;bottom:12px!important;right:12px!important}
+
+/* ---- Clear All Data (settings) ---- */
+.setting-clear .setting-item-left i{color:#ff6b6b}
+.setting-clear.armed{background:rgba(255,80,80,.16)!important;color:#ff8a8a}
+.setting-clear.armed .setting-item-left i{animation:v11Shake .5s ease-in-out infinite}
+.setting-clear.busy{opacity:.6;pointer-events:none}
+@keyframes v11Shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+
+/* ---- country leaderboard: percentage ---- */
+.lb-row{grid-template-columns:31% 1fr 22%!important}
+.lb-num{line-height:1.15}
+.lb-num b{display:block;font-size:13px;font-weight:700;color:var(--brand-2)}
+.lb-num small{display:block;font-size:10px;color:var(--text-muted)}
+
+/* ---- social buttons animation ---- */
+.social-row.js-anim:not(.in) .social-item{opacity:0}
+.social-row.js-anim.in .social-item{animation:v11In .6s cubic-bezier(.2,.9,.3,1.25) both}
+.social-row.in .social-item:nth-child(2){animation-delay:.07s}
+.social-row.in .social-item:nth-child(3){animation-delay:.14s}
+.social-row.in .social-item:nth-child(4){animation-delay:.21s}
+.social-row.in .social-item:nth-child(5){animation-delay:.28s}
+.social-row.in .social-item:nth-child(6){animation-delay:.35s}
+@keyframes v11In{from{opacity:0;transform:translateY(22px) scale(.8)}to{opacity:1;transform:none}}
+
+.social-row .social-item{--sc:rgba(var(--brand-glow),.9);transition:scale .12s}
+.social-row .social-item:active{scale:.9}
+.social-row .social-item[href*="youtube"]{--sc:#ff3030}
+.social-row .social-item[href*="tiktok"]{--sc:#25f4ee}
+.social-row .social-item[href*="t.me"]{--sc:#2aabee}
+.social-row .social-item[href*="github"]{--sc:#d0d7de}
+.social-row .social-item[href*="whatsapp.com"],.social-row .social-item[href*="wa.me"]{--sc:#25d366}
+
+.social-row .social-ic{position:relative;overflow:hidden;animation:v11Float 3.2s ease-in-out infinite}
+.social-row .social-item:nth-child(2) .social-ic{animation-delay:-.5s}
+.social-row .social-item:nth-child(3) .social-ic{animation-delay:-1s}
+.social-row .social-item:nth-child(4) .social-ic{animation-delay:-1.5s}
+.social-row .social-item:nth-child(5) .social-ic{animation-delay:-2s}
+.social-row .social-item:nth-child(6) .social-ic{animation-delay:-2.5s}
+@keyframes v11Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+/* glowing ring pulse in each brand's colour */
+.social-row .social-ic::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 2px var(--sc),inset 0 0 14px var(--sc);opacity:0;animation:v11Ring 2.6s ease-out infinite;pointer-events:none}
+/* light sweep */
+.social-row .social-ic::after{content:"";position:absolute;top:0;bottom:0;left:-70%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);animation:v11Shine 3.8s ease-in-out infinite;pointer-events:none}
+.social-row .social-item:nth-child(2) .social-ic::before,.social-row .social-item:nth-child(2) .social-ic::after{animation-delay:.4s}
+.social-row .social-item:nth-child(3) .social-ic::before,.social-row .social-item:nth-child(3) .social-ic::after{animation-delay:.8s}
+.social-row .social-item:nth-child(4) .social-ic::before,.social-row .social-item:nth-child(4) .social-ic::after{animation-delay:1.2s}
+.social-row .social-item:nth-child(5) .social-ic::before,.social-row .social-item:nth-child(5) .social-ic::after{animation-delay:1.6s}
+.social-row .social-item:nth-child(6) .social-ic::before,.social-row .social-item:nth-child(6) .social-ic::after{animation-delay:2s}
+@keyframes v11Ring{0%{opacity:0}30%{opacity:.9}100%{opacity:0}}
+@keyframes v11Shine{0%,55%{left:-70%}100%{left:140%}}
+/* icon itself wiggles a little */
+.social-row .social-ic i{animation:v11Pop 3.2s ease-in-out infinite}
+@keyframes v11Pop{0%,86%,100%{transform:scale(1) rotate(0)}91%{transform:scale(1.18) rotate(-8deg)}96%{transform:scale(1.1) rotate(8deg)}}
+/* weak phones: keep the light animations only */
+html.low-end .social-row .social-ic::after,html.low-end .social-row .social-ic::before{display:none}
+@media (prefers-reduced-motion:reduce){
+  .social-row .social-ic,.social-row .social-ic i,.social-row .social-ic::before,.social-row .social-ic::after{animation:none!important}
+  .social-row.js-anim:not(.in) .social-item{opacity:1}
+  .social-row.js-anim.in .social-item{animation:none}
+}
+</style>
+
+<script id="v11-js">
+(function(){
+  /* ===== social row: play entrance animation when it scrolls into view ===== */
+  try{
+    var row=document.querySelector('.social-row');
+    if(row){
+      if('IntersectionObserver' in window){
+        row.classList.add('js-anim');
+        var io=new IntersectionObserver(function(es){
+          es.forEach(function(e){ if(e.isIntersecting){ row.classList.add('in'); io.disconnect(); } });
+        },{threshold:.15});
+        io.observe(row);
+      }
+    }
+  }catch(e){}
+
+  /* ===== Clear All Data ===== */
+  var btn=document.getElementById('clearAllBtn');
+  if(!btn) return;
+  var label=btn.querySelector('.setting-item-left'), orig=label.innerHTML, armed=false, tm=null;
+  function disarm(){ armed=false; btn.classList.remove('armed'); label.innerHTML=orig; clearTimeout(tm); }
+  function toast(m){ try{ showToast(m); }catch(e){} }
+
+  // empty an IndexedDB database (wallpaper / cover video) and delete it
+  function wipeDb(name){
+    return new Promise(function(res){
+      var done=false; function fin(){ if(!done){ done=true; res(); } }
+      setTimeout(fin,1500);
+      function drop(){ try{ var d=indexedDB.deleteDatabase(name); d.onsuccess=d.onerror=d.onblocked=fin; }catch(e){ fin(); } }
+      try{
+        var o=indexedDB.open(name);
+        o.onerror=fin;
+        o.onsuccess=function(){
+          var db=o.result;
+          try{
+            var st=[].slice.call(db.objectStoreNames);
+            if(!st.length){ db.close(); return drop(); }
+            var tx=db.transaction(st,'readwrite');
+            st.forEach(function(n){ tx.objectStore(n).clear(); });
+            tx.oncomplete=tx.onerror=tx.onabort=function(){ try{db.close();}catch(e){} drop(); };
+          }catch(e){ try{db.close();}catch(_){} fin(); }
+        };
+      }catch(e){ fin(); }
+    });
+  }
+
+  async function wipe(){
+    btn.classList.add('busy');
+    // keep only what must survive so referrals can't be abused and the view counter isn't inflated
+    var keepL={}, keepS={};
+    ['ahmad_referral_code','ahmad_ref_tracked'].forEach(function(k){ try{ var v=localStorage.getItem(k); if(v!=null) keepL[k]=v; }catch(e){} });
+    try{ var vc=sessionStorage.getItem('ahmad_view_counted'); if(vc!=null) keepS.ahmad_view_counted=vc; }catch(e){}
+
+    try{ localStorage.clear(); }catch(e){}
+    try{ sessionStorage.clear(); }catch(e){}
+    Object.keys(keepL).forEach(function(k){ try{ localStorage.setItem(k,keepL[k]); }catch(e){} });
+    Object.keys(keepS).forEach(function(k){ try{ sessionStorage.setItem(k,keepS[k]); }catch(e){} });
+
+    try{ document.cookie.split(';').forEach(function(c){ var n=c.split('=')[0].trim(); if(n) document.cookie=n+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'; }); }catch(e){}
+
+    var names=['ahmad_wp_db','ahmad_cover_db'];
+    try{ if(indexedDB.databases){ var l=await indexedDB.databases(); l.forEach(function(d){ if(d.name && names.indexOf(d.name)<0) names.push(d.name); }); } }catch(e){}
+    await Promise.all(names.map(wipeDb));
+
+    try{ if(window.caches){ var ks=await caches.keys(); await Promise.all(ks.map(function(k){ return caches.delete(k); })); } }catch(e){}
+
+    toast('✨ Sab clear! Website naye sire se shuru ho rahi hai...');
+    setTimeout(function(){ location.replace(location.pathname); },700);
+  }
+
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(!armed){
+      armed=true; btn.classList.add('armed');
+      label.innerHTML='<i class="fas fa-triangle-exclamation"></i> Tap again to confirm';
+      tm=setTimeout(disarm,4000);
+      return;
+    }
+    disarm(); wipe();
+  });
 })();
 </script>
 </body>
